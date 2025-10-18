@@ -1,7 +1,48 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-     
+   <style>
+/* Carousel container */
+.m_img-carousel {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent; /* optional */
+}
+
+/* Track for scrolling */
+.m_img-carousel-track {
+  display: inline-flex;
+  animation: scroll 60s linear infinite;
+}
+
+/* Images style */
+.m_img-carousel-image {
+  display: inline-block;
+  height: 50px;
+  margin: 0 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.m_img-carousel-image:hover {
+  transform: scale(1.1);
+}
+
+/* Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+</style>
+  
     <style>
       .floating-image {
         position: fixed;
@@ -1016,7 +1057,7 @@
       href="https://moralis.com/wp-content/uploads/2024/10/Wallets-Linechart.webp"
       as="image"
     />
-
+   
     <style>
       *:not(.elementor-editor-active) .plus-conditions--hidden {
         display: none;
